@@ -1,0 +1,76 @@
+<resources>
+
+    <!-- Theme Screens -->
+
+    <style name="Theme.Application"
+        parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+        <!-- Color scheme -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
+        <item name="android:windowBackground">@drawable/white</item>
+        <!-- View theme -->
+        <item name="navigationIcon">@drawable/abc_ic_ab_back_material</item>
+        <item name="android:textViewStyle">@style/Theme.Application.Widget.TextView</item>
+        <item name="materialButtonStyle">@style/Theme.Application.Widget.Button</item>
+        <!-- Dialog theme -->
+        <item name="android:datePickerDialogTheme">?attr/alertDialogTheme</item>
+        <item name="android:timePickerDialogTheme">?attr/alertDialogTheme</item>
+        <item name="dialogTheme">?attr/alertDialogTheme</item>
+        <item name="alertDialogTheme">@style/Theme.Application.Dialog.Alert</item>
+        <item name="materialAlertDialogTheme">@style/Theme.Application.Dialog</item>
+        <item name="bottomSheetDialogTheme">@style/Theme.Application.BottomSheetDialog</item>
+    </style>
+
+    <style name="Theme.Application.Animation">
+        <item name="enterAnim">@android:anim/fade_in</item>
+        <item name="exitAnim">@android:anim/fade_out</item>
+        <item name="popEnterAnim">@android:anim/fade_in</item>
+        <item name="popExitAnim">@android:anim/fade_out</item>
+    </style>
+
+    <style name="Theme.Application.Splash"
+        parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="windowSplashScreenBackground">@drawable/ic_launcher_background</item>
+        <item name="postSplashScreenTheme">@style/Theme.Application.Animation</item>
+        <item name="windowSplashScreenAnimationDuration">0</item>
+    </style>
+
+    <!-- Theme Dialogs -->
+
+    <style name="Theme.Application.Dialog.Alert"
+        parent="Theme.MaterialComponents.DayNight.Dialog.Alert.Bridge">
+        <!-- Color scheme -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
+    </style>
+
+    <style name="Theme.Application.Dialog"
+        parent="Theme.MaterialComponents.DayNight.Dialog.Bridge">
+        <!-- Color scheme -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
+    </style>
+
+    <style name="Theme.Application.Dialog.Transparent">
+        <item name="android:windowBackground">@drawable/transparent</item>
+    </style>
+
+    <style name="Theme.Application.BottomSheetDialog"
+        parent="Theme.MaterialComponents.BottomSheetDialog">
+        <!-- Color scheme -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
+        <!-- View theme -->
+        <item name="bottomSheetStyle">@style/Widget.MaterialComponents.BottomSheet.Modal</item>
+    </style>
+
+</resources>

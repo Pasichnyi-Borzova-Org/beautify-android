@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainRootFragmentGraph"
+    app:startDestination="@id/notImplementedYetFragment">
+
+    <fragment
+        android:id="@+id/notImplementedYetFragment"
+        android:label="@string/not_implemented_yet"
+        android:name="com.opasichnyi.beautify.view.stub.fragment.NotImplementedYetFragment" />
+
+</navigation>

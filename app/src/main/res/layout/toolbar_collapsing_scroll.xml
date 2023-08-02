@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/appBarLayout"
+    style="@style/Style.AppBarLayout"
+    tools:theme="@style/Theme.Application.Widget.AppBarLayout">
+
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:id="@+id/collapsingToolbarLayout"
+        style="@style/Style.AppBarLayout.CollapsingToolbarLayout.Scroll"
+        app:contentScrim="?attr/colorPrimary">
+
+        <ImageView
+            android:id="@+id/toolbarImageView"
+            style="@style/MatchParent"
+            android:scaleType="centerCrop"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            style="@style/Style.Toolbar.ScrollAlways"
+            android:background="@android:color/transparent"
+            app:layout_collapseMode="pin"
+            tools:title="@string/app_name" />
+
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+</com.google.android.material.appbar.AppBarLayout>

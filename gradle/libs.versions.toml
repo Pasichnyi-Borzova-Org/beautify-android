@@ -1,0 +1,174 @@
+[versions]
+## common
+# plugin
+gradle-android = "8.1.0"
+benManes = "0.47.0"
+gradle-detekt = "1.23.0"
+# kotlin
+kotlin = "1.9.0"
+kotlin-coroutines = "1.7.3"
+kotlin-immutable-collections = "0.3.5"
+kotlin-atomic = "0.21.0"
+kotlin-serialization-json = "1.5.1"
+# project
+minSdk = "25" # File - New - New Project - Next -> Min sdk must be > 93%
+compileSdk = "34"
+compileSdkExtension = "5" # for compileSdk 33
+targetSdk = "34"
+buildToolsVersion = "34.0.0"
+jvmTarget = "17"
+kotlinJvmTarget = "17"
+## jetpack
+# arch
+jetpack-core = "1.10.1"
+jetpack-annotation = "1.6.0"
+jetpack-appcompat = "1.6.1"
+jetpack-lifecycle = "2.6.1"
+# ui
+jetpack-splash = "1.0.1"
+jetpack-activity = "1.7.2"
+jetpack-fragment = "1.6.1"
+jetpack-browser = "1.5.0"
+jetpack-webkit = "1.7.0"
+# views
+jetpack-constraint = "2.1.4"
+jetpack-coordinator = "1.2.0"
+jetpack-recyclerView = "1.3.1"
+material = "1.9.0"
+# navigation
+jetpack-navigation = "2.6.0"
+## frameworks
+# di
+di-hilt = "2.47"
+# image
+glide = "4.15.1" # INFO: Glide < 3.0.0 has a forbidden BSD Licence. See ci/dependency_exceptions.txt
+# utils
+desugarJdk = "2.0.3"
+timber = "5.0.1"
+leakcanary = "2.12"
+## test
+test-junit = "4.13.2"
+test-robolectric = "4.10.3"
+test-mockk = "1.13.5"
+test-android-core = "2.2.0"
+## lint
+detekt = "1.23.1"
+
+[libraries]
+# plugin
+gradle-navigation-safeargs-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "jetpack-navigation" }
+gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+# kotlin
+kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+kotlin-allopen = { module = "org.jetbrains.kotlin:kotlin-allopen", version.ref = "kotlin" }
+kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }
+kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlin-coroutines" }
+kotlin-immutable-collections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlin-immutable-collections" }
+kotlin-atomic = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlin-atomic" }
+kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization-json" }
+## jetpack
+# arch
+jetpack-core = { module = "androidx.core:core-ktx", version.ref = "jetpack-core" }
+jetpack-annotation = { module = "androidx.annotation:annotation", version.ref = "jetpack-annotation" }
+jetpack-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "jetpack-appcompat" }
+jetpack-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "jetpack-lifecycle" }
+jetpack-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "jetpack-lifecycle" }
+jetpack-viewmodel-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "jetpack-lifecycle" }
+jetpack-common = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "jetpack-lifecycle" }
+# ui
+jetpack-splash = { module = "androidx.core:core-splashscreen", version.ref = "jetpack-splash" }
+jetpack-activity = { module = "androidx.activity:activity-ktx", version.ref = "jetpack-activity" }
+jetpack-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "jetpack-fragment" }
+jetpack-browser = { module = "androidx.browser:browser", version.ref = "jetpack-browser" }
+jetpack-webkit = { module = "androidx.webkit:webkit", version.ref = "jetpack-webkit" }
+# views
+jetpack-constraint = { module = "androidx.constraintlayout:constraintlayout", version.ref = "jetpack-constraint" }
+jetpack-coordinator = { module = "androidx.coordinatorlayout:coordinatorlayout", version.ref = "jetpack-coordinator" }
+jetpack-recyclerView = { module = "androidx.recyclerview:recyclerview", version.ref = "jetpack-recyclerView" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+# navigation
+jetpack-navigation = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "jetpack-navigation" }
+jetpack-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "jetpack-navigation" }
+## frameworks
+# di
+hilt = { module = "com.google.dagger:hilt-android", version.ref = "di-hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "di-hilt" }
+# image
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+# utils
+desugarJdk = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugarJdk" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+leakcanary = { module = "com.squareup.leakcanary:plumber-android", version.ref = "leakcanary" }
+leakcanaryDebug = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }
+## test
+test-junit = { module = "junit:junit", version.ref = "test-junit" }
+test-robolectric = { module = "org.robolectric:robolectric", version.ref = "test-robolectric" }
+test-mockk = { module = "io.mockk:mockk", version.ref = "test-mockk" }
+test-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlin-coroutines" }
+test-android-core = { module = "androidx.arch.core:core-testing", version.ref = "test-android-core" }
+test-android-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-testing", version.ref = "jetpack-lifecycle" }
+## lint
+detekt-api = { module = "io.gitlab.arturbosch.detekt:detekt-api", version.ref = "detekt" }
+detekt-cli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "detekt" }
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "gradle-android" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }
+ben-manes = { id = "com.github.ben-manes.versions", version.ref = "benManes" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "gradle-detekt" }
+di-hilt = { id = "com.google.dagger.hilt.android", version.ref = "di-hilt" }
+
+[bundles]
+# bom
+kotlin-bom = [
+    "kotlin-stdlib",
+    "kotlin-reflect"
+]
+# arch/ui
+arch = [
+    "jetpack-core",
+    "jetpack-annotation",
+    "jetpack-appcompat",
+    "jetpack-viewmodel",
+    "jetpack-runtime",
+    "jetpack-viewmodel-savedstate",
+    "jetpack-common"
+]
+ui = [
+    "jetpack-splash",
+    "jetpack-activity",
+    "jetpack-fragment",
+    "jetpack-browser",
+    "jetpack-webkit"
+]
+views = [
+    "material",
+    "jetpack-constraint",
+    "jetpack-coordinator",
+    "jetpack-recyclerView"
+]
+navigation = ["jetpack-navigation", "jetpack-navigation-fragment"]
+# frameworks
+di = ["hilt"]
+di-compiler = ["hilt-compiler"]
+multithreading = ["kotlin-coroutines", "kotlin-coroutines-android"]
+network = ["glide"]
+data = [
+    "kotlin-immutable-collections",
+    "kotlin-atomic",
+    "kotlin-serialization-json"
+]
+# test
+test = [
+    "test-junit",
+    "test-robolectric",
+    "test-mockk",
+    "test-kotlin-coroutines",
+    "test-android-lifecycle-runtime",
+    "test-android-core"
+]

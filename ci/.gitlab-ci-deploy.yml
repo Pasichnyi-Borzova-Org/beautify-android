@@ -1,0 +1,32 @@
+deployApk:
+  stage: deploy
+  script:
+    - /mds/upload.sh -sd=app/build/outputs/apk -fe=apk
+  only:
+    - master
+    - dev
+    - ci
+  cache: { }
+  variables:
+    GIT_STRATEGY: none
+  retry: 2
+  dependencies:
+    - buildApk
+  tags:
+    - local
+
+deployAab:
+  stage: deploy
+  script:
+    - /mds/upload.sh -sd=app/build/outputs/bundle -fe=aab -dst=Bundle
+  only:
+    - master
+    - ci
+  cache: { }
+  variables:
+    GIT_STRATEGY: none
+  retry: 2
+  dependencies:
+    - buildAab
+  tags:
+    - local

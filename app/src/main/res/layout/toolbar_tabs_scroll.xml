@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/appBarLayout"
+    style="@style/Style.AppBarLayout"
+    tools:theme="@style/Theme.Application.Widget.AppBarLayout">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        style="@style/Style.Toolbar.ScrollAlways"
+        tools:title="@string/app_name" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        style="@style/Style.TabLayout" />
+
+</com.google.android.material.appbar.AppBarLayout>

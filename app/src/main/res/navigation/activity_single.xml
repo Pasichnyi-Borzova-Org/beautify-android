@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/singleActivityGraph"
+    app:startDestination="@id/mainRootFragment">
+
+    <fragment
+        android:id="@+id/mainRootFragment"
+        android:name="com.opasichnyi.beautify.view.impl.fragment.main.MainRootFragment" />
+
+</navigation>

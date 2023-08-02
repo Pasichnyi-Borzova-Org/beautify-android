@@ -1,0 +1,32 @@
+buildApk:
+  stage: build
+  script:
+    - ./gradlew assemble
+      -PbuildToolsVersion="$BUILD_TOOLS_VERSION"
+      -PversionName="${VERSION_NAME}"
+      -PversionCode="${VERSION_CODE}"
+      --no-daemon
+  artifacts:
+    paths:
+      - app/build/outputs/
+  dependencies: [ ]
+  only:
+    - master
+    - dev
+    - ci
+
+buildAab:
+  stage: build
+  script:
+    - ./gradlew bundleRelease
+      -PbuildToolsVersion="$BUILD_TOOLS_VERSION"
+      -PversionName="${VERSION_NAME}"
+      -PversionCode="${VERSION_CODE}"
+      --no-daemon
+  artifacts:
+    paths:
+      - app/build/outputs/
+  dependencies: [ ]
+  only:
+    - master
+    - ci

@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Theme widgets -->
+
+    <style name="Theme.Application.Widget.Popup"
+        parent="ThemeOverlay.MaterialComponents.Dark" />
+
+    <style name="Theme.Application.Widget.AppBarLayout"
+        parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+
+</resources>

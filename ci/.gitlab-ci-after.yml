@@ -1,0 +1,26 @@
+create tag:
+  stage: .post
+  script:
+    - /git/post_tag.sh -tag="v$VERSION_NAME" -message="release version $VERSION_NAME"
+  cache: { }
+  dependencies: [ ]
+  only:
+    - master
+
+notify slack dev:
+  stage: .post
+  script:
+    - '/slack/notify_slack.sh -message="Android #$PROJECT_NUMBER is available!"'
+  cache: { }
+  dependencies: [ ]
+  only:
+    - dev
+
+notify slack master:
+  stage: .post
+  script:
+    - '/slack/notify_slack.sh -message=":star: Android #$PROJECT_NUMBER is available!"'
+  cache: { }
+  dependencies: [ ]
+  only:
+    - master

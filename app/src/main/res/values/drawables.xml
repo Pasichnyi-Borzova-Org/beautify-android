@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Common -->
+
+    <drawable name="transparent">@color/transparent</drawable>
+    <drawable name="white">@color/white</drawable>
+    <drawable name="black">@color/black</drawable>
+    <drawable name="divider">@color/divider</drawable>
+
+</resources>

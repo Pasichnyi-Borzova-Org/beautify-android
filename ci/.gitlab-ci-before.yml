@@ -1,0 +1,25 @@
+set GRADLE_USER_HOME:
+  stage: .pre
+  script:
+    - . /gradle/set_gradle_user_home.sh
+  cache: { }
+  dependencies: [ ]
+
+prebuild:
+  stage: .pre
+  needs:
+    - "set GRADLE_USER_HOME"
+  script:
+    - ./gradlew compileSources
+      -PbuildToolsVersion="$BUILD_TOOLS_VERSION"
+      -PversionName="${VERSION_NAME}"
+      -PversionCode="${VERSION_CODE}"
+      --no-daemon
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - .gradle
+      - build-cache
+  dependencies: [ ]
+  except:
+    - dev

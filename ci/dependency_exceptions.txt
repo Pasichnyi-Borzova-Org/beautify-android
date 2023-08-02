@@ -1,0 +1,2 @@
+com.github.bumptech.glide:glide
+org.jacoco:org.jacoco.ant

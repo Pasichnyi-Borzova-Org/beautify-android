@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><!-- https://developer.android.com/guide/topics/resources/app-languages#use-localeconfig -->
+<locale-config
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="en" />
+</locale-config>

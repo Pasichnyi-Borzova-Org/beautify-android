@@ -1,0 +1,56 @@
+lint:
+  stage: check
+  script:
+    - ./gradlew lint detektDebug
+      -PbuildToolsVersion="$BUILD_TOOLS_VERSION"
+      -PversionName="${VERSION_NAME}"
+      -PversionCode="${VERSION_CODE}"
+      --no-daemon
+  except:
+    - master
+    - dev
+  dependencies: [ ]
+
+test:
+  stage: check
+  script:
+    - ./gradlew test
+      -PbuildToolsVersion="$BUILD_TOOLS_VERSION"
+      -PversionName="${VERSION_NAME}"
+      -PversionCode="${VERSION_CODE}"
+      --no-daemon
+  except:
+    - master
+    - dev
+  dependencies: [ ]
+
+validate signing config dev:
+  stage: check
+  script:
+    - /gradle/validate_signing.sh
+  cache: { }
+  dependencies: [ ]
+  allow_failure: true
+  only:
+    - dev
+    - ci
+
+validate signing config master:
+  stage: check
+  script:
+    - /gradle/validate_signing.sh
+  cache: { }
+  dependencies: [ ]
+  only:
+    - master
+
+check licenses:
+  stage: check
+  script:
+    - /gradle/check_licenses.sh
+  cache: { }
+  dependencies: [ ]
+  allow_failure: true
+  except:
+    - master
+    - dev

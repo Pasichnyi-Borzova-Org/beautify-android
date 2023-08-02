@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Theme Widgets -->
+
+    <style name="Theme.Application.Widget.TextView"
+        parent="Widget.MaterialComponents.TextView">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textSize">@dimen/default_text</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.Application.Widget.Button"
+        parent="Widget.Material3.Button">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">@dimen/button_text</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.09</item>
+    </style>
+
+    <style name="Theme.Application.Widget.Popup"
+        parent="ThemeOverlay.MaterialComponents.Light" />
+
+    <style name="Theme.Application.Widget.AppBarLayout"
+        parent="ThemeOverlay.MaterialComponents.ActionBar" />
+
+</resources>

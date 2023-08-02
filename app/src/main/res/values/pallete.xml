@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Material -->
+
+    <color name="color_primary">#0089BB</color>
+    <color name="color_primary_dark">#006E8A</color>
+    <color name="color_accent">#E5C000</color>
+
+    <!-- Common -->
+
+    <color name="transparent">@android:color/transparent</color>
+    <color name="white">@android:color/white</color>
+    <color name="black">@android:color/black</color>
+    <color name="divider">#E9E9E9</color>
+
+</resources>
