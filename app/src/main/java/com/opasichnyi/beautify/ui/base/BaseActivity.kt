@@ -1,4 +1,4 @@
-package com.opasichnyi.beautify.view
+package com.opasichnyi.beautify.ui.base
 
 import android.os.Bundle
 import androidx.annotation.CallSuper
@@ -7,10 +7,10 @@ import androidx.viewbinding.ViewBinding
 import com.opasichnyi.beautify.presentation.base.BaseViewModel
 import com.opasichnyi.beautify.util.ext.getGenericClass
 import com.opasichnyi.beautify.util.ext.unsafeLazy
-import com.opasichnyi.beautify.view.ext.inflateBinding
+import com.opasichnyi.beautify.ui.ext.inflateBinding
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatActivity(),
+open class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatActivity(),
     BaseView<VB, VM> {
 
 

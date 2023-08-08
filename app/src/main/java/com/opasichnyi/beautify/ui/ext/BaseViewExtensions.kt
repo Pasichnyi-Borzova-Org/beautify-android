@@ -1,4 +1,4 @@
-package com.opasichnyi.beautify.view.ext
+package com.opasichnyi.beautify.ui.ext
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,7 @@ import androidx.viewbinding.ViewBinding
 import com.opasichnyi.beautify.presentation.base.BaseViewModel
 import com.opasichnyi.beautify.util.ext.getFunFromGenericClass
 import com.opasichnyi.beautify.util.ext.getGenericClass
-import com.opasichnyi.beautify.view.BaseView
+import com.opasichnyi.beautify.ui.base.BaseView
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 
