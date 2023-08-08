@@ -138,7 +138,7 @@ inline fun Lifecycle.launchOnLifecycleEvent(
 
     this@launchOnLifecycleEvent.addObserver(lifecycleObserver)
 
-    awaitCancellation() {
+    awaitCancellation {
         this@launchOnLifecycleEvent.removeObserver(lifecycleObserver)
     }
 }

@@ -16,7 +16,8 @@ import java.lang.reflect.ParameterizedType
  *
  * @return particular method of type [C]. If method isn't found - throw [KotlinNullPointerException].
  */
-@CheckResult fun <C> Class<*>.getFunFromGenericClass(
+@CheckResult
+fun <C> Class<*>.getFunFromGenericClass(
     @IntRange(from = 0) genericPosition: Int,
     conditionForSearchFun: (Method) -> Boolean,
 ): Method = getFunFromGenericClassOrNull<C>(genericPosition, conditionForSearchFun)!!
@@ -32,14 +33,15 @@ import java.lang.reflect.ParameterizedType
  *
  * @return particular method of type [C]. If method isn't found - return null.
  */
-@CheckResult fun <C> Class<*>.getFunFromGenericClassOrNull(
+@CheckResult
+fun <C> Class<*>.getFunFromGenericClassOrNull(
     @IntRange(from = 0) genericPosition: Int,
     conditionForSearchFun: (Method) -> Boolean,
 ): Method? =
     getGenericClass<C>(genericPosition)
         .declaredMethods
         .firstOrNull(conditionForSearchFun)
-            ?: superclass?.getFunFromGenericClassOrNull<C>(genericPosition, conditionForSearchFun)
+        ?: superclass?.getFunFromGenericClassOrNull<C>(genericPosition, conditionForSearchFun)
 
 /**
  * Get instance of [Class] for generic type [C] at the given genericPosition.
@@ -84,4 +86,4 @@ fun <C> Class<*>.getGenericClassOrNull(@IntRange(from = 0) genericPosition: Int)
     ((genericSuperclass as? ParameterizedType?)
         ?.actualTypeArguments
         ?.getOrNull(genericPosition) as? Class<C>)
-            ?: superclass?.getGenericClassOrNull(genericPosition)
+        ?: superclass?.getGenericClassOrNull(genericPosition)

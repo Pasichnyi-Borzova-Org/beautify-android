@@ -7,21 +7,24 @@ import java.io.Closeable
  * @see lazy
  * @see LazyThreadSafetyMode.SYNCHRONIZED
  */
-@CheckResult fun <T> safeLazy(initializer: () -> T): Lazy<T> =
+@CheckResult
+fun <T> safeLazy(initializer: () -> T): Lazy<T> =
     lazy(LazyThreadSafetyMode.SYNCHRONIZED, initializer)
 
 /**
  * @see lazy
  * @see LazyThreadSafetyMode.PUBLICATION
  */
-@CheckResult fun <T> safeInitLazy(initializer: () -> T): Lazy<T> =
+@CheckResult
+fun <T> safeInitLazy(initializer: () -> T): Lazy<T> =
     lazy(LazyThreadSafetyMode.PUBLICATION, initializer)
 
 /**
  * @see lazy
  * @see LazyThreadSafetyMode.NONE
  */
-@CheckResult fun <T> unsafeLazy(initializer: () -> T): Lazy<T> =
+@CheckResult
+fun <T> unsafeLazy(initializer: () -> T): Lazy<T> =
     lazy(LazyThreadSafetyMode.NONE, initializer)
 
 /**
@@ -32,7 +35,8 @@ import java.io.Closeable
  *
  * @return result of [block], if exception was thrown - return null.
  */
-@CheckResult inline fun <T> tryOrNull(
+@CheckResult
+inline fun <T> tryOrNull(
     log: (Throwable) -> Unit,
     block: () -> T,
 ): T? = runCatching(block).onFailure(log).getOrNull()
