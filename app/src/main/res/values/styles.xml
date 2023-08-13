@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MatchParent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="Wrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Wrap.Width0">
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="Wrap.Height0">
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="Wrap.WidthHeight0">
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="Wide">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Wide.Height0">
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="Tall">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="Tall.Width0">
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="Tall.Height0">
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="Image64">
+        <item name="android:layout_width">64dp</item>
+        <item name="android:layout_height">64dp</item>
+    </style>
+
+    <style name="Image24">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+    </style>
+
+    <style name="Image32">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+    </style>
+
+    <style name="Image48">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
+    <style name="DividerHorizontal"
+        parent="Wide">
+        <item name="android:layout_height">@dimen/divider</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
+    <style name="DividerVertical"
+        parent="Wide.Height0">
+        <item name="android:layout_width">@dimen/divider</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
+</resources>

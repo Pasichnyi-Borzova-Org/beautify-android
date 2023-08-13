@@ -1,4 +1,4 @@
-package com.opasichnyi.beautify.view.ext
+package com.opasichnyi.beautify.ui.ext
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.viewbinding.ViewBinding
 import com.opasichnyi.beautify.presentation.base.BaseViewModel
+import com.opasichnyi.beautify.ui.base.BaseView
 import com.opasichnyi.beautify.util.ext.getFunFromGenericClass
 import com.opasichnyi.beautify.util.ext.getGenericClass
-import com.opasichnyi.beautify.view.BaseView
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 
@@ -59,7 +59,8 @@ fun <VB : ViewBinding> BaseView<VB, *>.inflateBinding(
  *
  * @return true if method was found, otherwise false.
  */
-@CheckResult private fun isInflateWithoutParentFun(method: Method): Boolean = method.run {
+@CheckResult
+private fun isInflateWithoutParentFun(method: Method): Boolean = method.run {
     Modifier.isStatic(modifiers) &&
             parameterTypes.size == 1 &&
             parameterTypes.first() == LayoutInflater::class.java
@@ -77,7 +78,8 @@ fun <VB : ViewBinding> BaseView<VB, *>.inflateBinding(
  *
  * @return true if method was found, otherwise false.
  */
-@CheckResult private fun isInflateWithParentFun(method: Method): Boolean = method.run {
+@CheckResult
+private fun isInflateWithParentFun(method: Method): Boolean = method.run {
     Modifier.isStatic(modifiers) &&
             parameterTypes.size == 3 &&
             parameterTypes[0] == LayoutInflater::class.java &&
@@ -93,7 +95,8 @@ fun <VB : ViewBinding> BaseView<VB, *>.inflateBinding(
  *
  * @return instance of generic type [VM] that implements [BaseViewModel].
  */
-@CheckResult fun <VM, SO> SO.createViewModel(): VM where
+@CheckResult
+fun <VM, SO> SO.createViewModel(): VM where
         VM : BaseViewModel,
         SO : BaseView<*, VM>,
         SO : ViewModelStoreOwner =

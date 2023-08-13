@@ -4,13 +4,34 @@
 
     <application
         android:allowBackup="true"
+        android:name=".Application"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Beautify"
-        tools:targetApi="31" />
+        android:theme="@style/Theme.Beautify.Starting"
+        tools:targetApi="31">
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.Beautify" />
+        <activity
+            android:name=".ui.activity.HomeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.Beautify" />
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Beautify.Starting">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
 
 </manifest>

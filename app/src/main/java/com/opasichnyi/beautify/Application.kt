@@ -10,6 +10,11 @@ import org.koin.core.logger.Level
 
 class Application : Application() {
 
+    override fun onCreate() {
+        super.onCreate()
+        initDi()
+    }
+
     private fun initDi() {
         startKoin {
             androidContext(this@Application)

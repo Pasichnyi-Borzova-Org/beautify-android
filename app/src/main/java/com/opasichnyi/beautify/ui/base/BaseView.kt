@@ -1,4 +1,4 @@
-package com.opasichnyi.beautify.view
+package com.opasichnyi.beautify.ui.base
 
 import android.os.Bundle
 import androidx.viewbinding.ViewBinding

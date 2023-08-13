@@ -5,6 +5,18 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- Material -->
+
+    <color name="color_primary">#0089BB</color>
+    <color name="color_primary_dark">#006E8A</color>
+    <color name="color_accent">#E5C000</color>
+
+    <!-- Common -->
+
+    <color name="transparent">@android:color/transparent</color>
+    <color name="white">@android:color/white</color>
+    <color name="black">@android:color/black</color>
+    <color name="divider">#E9E9E9</color>
+
 </resources>
