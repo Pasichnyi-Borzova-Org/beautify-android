@@ -8,5 +8,5 @@ data class UserAccount(
     val login: String,
     val name: String,
     val surname: String?,
-    val isMaster: Boolean,
+    val role: UserRole,
 ) : Parcelable

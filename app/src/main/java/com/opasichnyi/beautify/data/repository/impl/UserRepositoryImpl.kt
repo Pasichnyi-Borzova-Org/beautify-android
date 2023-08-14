@@ -2,21 +2,20 @@ package com.opasichnyi.beautify.data.repository.impl
 
 import com.opasichnyi.beautify.data.datasource.LoggedInUserDatasource
 import com.opasichnyi.beautify.data.datasource.mock.MockAccountDataSource
-import com.opasichnyi.beautify.data.mapper.DataUserToDomainMapper
 import com.opasichnyi.beautify.data.repository.iface.UserRepository
+import com.opasichnyi.beautify.domain.entity.RegisterData
+import com.opasichnyi.beautify.domain.entity.RegisterResult
 import com.opasichnyi.beautify.domain.entity.UserAccount
 
 class UserRepositoryImpl(
     private val loggedInUserDatasource: LoggedInUserDatasource,
     private val accountDataSource: MockAccountDataSource,
-    private val dataUserToDomainMapper: DataUserToDomainMapper,
 ) : UserRepository {
 
     override suspend fun getLoggedInUser(): UserAccount? {
         val currentLoggedUsername = loggedInUserDatasource.getLoggedInUser()
         return if (currentLoggedUsername != null) {
-            val user = accountDataSource.getAccountByUsername(currentLoggedUsername)
-            dataUserToDomainMapper.mapDataUserToDomain(user)
+            accountDataSource.getAccountByUsername(currentLoggedUsername)
         } else {
             null
         }
@@ -27,12 +26,18 @@ class UserRepositoryImpl(
         if (userResult.isSuccess) {
             loggedInUserDatasource.saveLoggedInUser(username)
         }
-        return userResult.map { dataUserToDomainMapper.mapDataUserToDomain(it) }
+        return userResult
     }
 
     override suspend fun logoutUser() {
         loggedInUserDatasource.deleteLoggedInUser()
     }
 
-
+    override suspend fun registerUser(registerData: RegisterData): RegisterResult {
+        return accountDataSource.registerUser(registerData).also {
+            if (it is RegisterResult.Success) {
+                loggedInUserDatasource.saveLoggedInUser(registerData.login)
+            }
+        }
+    }
 }
