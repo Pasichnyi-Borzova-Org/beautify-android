@@ -21,16 +21,6 @@
     <string name="password_short_message">Password should be longer than 7 digits</string>
     <string name="passwords_different_message">This password differs from original</string>
     <string name="i_am_a_master_text">I am a master</string>
-
-    <!-- TODO: Remove these titles -->
-    <string name="title_activity_root">RootActivity</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string-array name="user_role">
-        <item>Master</item>
-        <item>Client</item>
-    </string-array>
 </resources>

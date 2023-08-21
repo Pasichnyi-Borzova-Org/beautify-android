@@ -13,7 +13,6 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 open class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatActivity(),
     BaseView<VB, VM> {
 
-
     protected val viewModel: VM by unsafeLazy {
         getViewModel(clazz = javaClass.getGenericClass<VM>(genericPosition = 1).kotlin)
     }
