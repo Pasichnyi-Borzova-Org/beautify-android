@@ -66,14 +66,12 @@
         <item name="android:layout_height">48dp</item>
     </style>
 
-    <style name="DividerHorizontal"
-        parent="Wide">
+    <style name="DividerHorizontal" parent="Wide">
         <item name="android:layout_height">@dimen/divider</item>
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
-    <style name="DividerVertical"
-        parent="Wide.Height0">
+    <style name="DividerVertical" parent="Wide.Height0">
         <item name="android:layout_width">@dimen/divider</item>
         <item name="android:background">?android:attr/listDivider</item>
     </style>
