@@ -1,20 +1,51 @@
 package com.opasichnyi.beautify.data.datasource.mock
 
-import com.opasichnyi.beautify.data.entity.DataUserAccount
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.core.content.edit
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.opasichnyi.beautify.data.exception.LoginFailedException
+import com.opasichnyi.beautify.domain.entity.RegisterData
+import com.opasichnyi.beautify.domain.entity.RegisterResult
+import com.opasichnyi.beautify.domain.entity.UserAccount
+import com.opasichnyi.beautify.domain.entity.UserRole
 import kotlinx.coroutines.delay
+import java.lang.reflect.Type
 
-class MockAccountDataSource {
+class MockAccountDataSource(
+    context: Context,
+) {
 
-    suspend fun getAccountByUsername(username: String): DataUserAccount {
-        delay(3000)
-        return accountsList.first { it.login == username }
+    private var sharedPreferences: SharedPreferences
+
+    private val gson = Gson()
+
+    init {
+        val masterKey: MasterKey = MasterKey.Builder(context)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        sharedPreferences = EncryptedSharedPreferences.create(
+            context,
+            "secret_shared_prefs",
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
     }
 
-    suspend fun loginUser(username: String, password: String): Result<DataUserAccount> {
+    suspend fun getAccountByUsername(username: String): UserAccount {
+        delay(3000)
+        return getAllUsers().first { it.login == username }
+    }
+
+    suspend fun loginUser(username: String, password: String): Result<UserAccount> {
         delay(3000)
         val account =
-            accountsList.firstOrNull { it.login == username && password == "_${it.login}" }
+            getAllUsers().firstOrNull { it.login == username && password == "_${it.login}" }
         return if (account != null) {
             Result.success(account)
         } else {
@@ -22,25 +53,59 @@ class MockAccountDataSource {
         }
     }
 
+    suspend fun registerUser(registerData: RegisterData): RegisterResult {
+        delay(3000)
+        val currentList = getAllUsers()
+        if (currentList.any { it.login == registerData.login }) {
+            return RegisterResult.Error
+        } else {
+            val newAccount = UserAccount(
+                login = registerData.login,
+                name = registerData.login,
+                surname = registerData.login,
+                role = registerData.role
+            )
+            saveUsers(currentList + newAccount)
+            return RegisterResult.Success(newAccount)
+        }
+    }
+
+    private fun getAllUsers(): List<UserAccount> {
+        val registeredUsers = sharedPreferences.getString(REGISTERED_USERS_TAG, null)
+        return gson.fromJson<MutableList<UserAccount>?>(registeredUsers, LIST_TYPE) ?: accountsList
+    }
+
+    private fun saveUsers(list: List<UserAccount>) {
+        val listString = gson.toJson(list)
+        sharedPreferences.edit {
+            putString(REGISTERED_USERS_TAG, listString)
+        }
+    }
+
 
     companion object {
-        val accountsList = listOf<DataUserAccount>(
-            DataUserAccount(
+
+        const val REGISTERED_USERS_TAG = "REGISTERED_USERS"
+        private val LIST_TYPE: Type = object : TypeToken<MutableList<UserAccount>?>() {}.type
+
+        val accountsList = mutableListOf(
+            UserAccount(
                 login = "pasichnyi",
                 name = "Oleksandr",
                 surname = "Pasichnyi",
-                isMaster = false,
+                role = UserRole.CLIENT,
             ),
-            DataUserAccount(
+            UserAccount(
                 login = "borzova",
                 name = "Yeseniia",
                 surname = "Borzova",
-                isMaster = false,
+                role = UserRole.CLIENT,
             ),
-            DataUserAccount(
+            UserAccount(
                 login = "somemaster",
                 name = "Master",
-                isMaster = true,
+                surname = "Kekus",
+                role = UserRole.MASTER,
             ),
         )
     }

@@ -8,10 +8,10 @@ import androidx.security.crypto.MasterKey
 
 
 class LoggedInUserDatasource(
-    private val context: Context,
+    context: Context,
 ) {
 
-    var sharedPreferences: SharedPreferences
+    private var sharedPreferences: SharedPreferences
 
     init {
         val masterKey: MasterKey = MasterKey.Builder(context)

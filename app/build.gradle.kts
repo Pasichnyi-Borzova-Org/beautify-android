@@ -98,4 +98,6 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.0-beta02")
 
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
+
+    implementation("com.google.code.gson:gson:2.7")
 }
