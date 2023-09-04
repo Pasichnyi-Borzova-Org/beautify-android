@@ -2,13 +2,19 @@ package com.opasichnyi.beautify.di.module
 
 import com.opasichnyi.beautify.data.datasource.LoggedInUserDatasource
 import com.opasichnyi.beautify.data.datasource.mock.MockAccountDataSource
-import com.opasichnyi.beautify.data.repository.iface.UserRepository
+import com.opasichnyi.beautify.data.datasource.mock.MockAppointmentsDataSource
+import com.opasichnyi.beautify.data.repository.impl.AppointmentsRepositoryImpl
 import com.opasichnyi.beautify.data.repository.impl.UserRepositoryImpl
+import com.opasichnyi.beautify.domain.interactor.GetUpcomingAppointmentsInteractor
 import com.opasichnyi.beautify.domain.interactor.LoggedInUserInteractor
 import com.opasichnyi.beautify.domain.interactor.LoginInteractor
 import com.opasichnyi.beautify.domain.interactor.RegistrationInteractor
+import com.opasichnyi.beautify.domain.repository.AppointmentsRepository
+import com.opasichnyi.beautify.domain.repository.UserRepository
+import com.opasichnyi.beautify.presentation.mapper.DomainAppointmentToUIAppointmentMapper
 import com.opasichnyi.beautify.presentation.mapper.DomainRegistrationResultToUIMapper
 import com.opasichnyi.beautify.presentation.mapper.UIRegisterDataToDomainMapper
+import com.opasichnyi.beautify.presentation.viewmodel.AppointmentsViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.HomeActivityViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.HomeViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.LoginActivityViewModel
@@ -33,10 +39,23 @@ private val dataModule = module {
         )
     }
 
+    single {
+        MockAppointmentsDataSource(
+            context = get(),
+        )
+    }
+
     single<UserRepository> {
         UserRepositoryImpl(
             loggedInUserDatasource = get(),
             accountDataSource = get()
+        )
+    }
+
+    single<AppointmentsRepository> {
+        AppointmentsRepositoryImpl(
+            loggedInUserDatasource = get(),
+            appointmentsDataSource = get(),
         )
     }
 }
@@ -48,6 +67,8 @@ private val domainModule = module {
     single { LoginInteractor(userRepository = get()) }
 
     single { RegistrationInteractor(userRepository = get()) }
+
+    single { GetUpcomingAppointmentsInteractor(appointmentsRepository = get()) }
 }
 
 private val viewModelModule = module {
@@ -85,6 +106,13 @@ private val viewModelModule = module {
             domainRegistrationResultToUIMapper = get(),
         )
     }
+
+    viewModel {
+        AppointmentsViewModel(
+            getUpcomingAppointmentsInteractor = get(),
+            appointmentMapper = get()
+        )
+    }
 }
 
 private val presentationModule = module {
@@ -92,6 +120,7 @@ private val presentationModule = module {
 
     single { DomainRegistrationResultToUIMapper() }
 
+    single { DomainAppointmentToUIAppointmentMapper() }
 }
 
 internal val appModules =

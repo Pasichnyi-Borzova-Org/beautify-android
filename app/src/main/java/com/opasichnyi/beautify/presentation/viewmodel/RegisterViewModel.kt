@@ -22,9 +22,11 @@ class RegisterViewModel(
     val registrationResult: SharedFlow<UIRegisterResult> = _registrationResult.asSharedFlow()
 
     fun tryRegister(uiRegisterData: UIRegisterData) = scope.launch {
+        showProgress()
         val validationResult = UIRegisterDataValidator().validate(uiRegisterData)
         if (!validationResult.isAllValid()) {
             _registrationResult.emit(UIRegisterResult.Error(validationResult))
+            hideProgress()
         } else {
             val registrationResult =
                 domainRegistrationResultToUIMapper.mapRegistrationResultToUiRegistrationResult(
@@ -34,6 +36,7 @@ class RegisterViewModel(
                     validationResult
                 )
             _registrationResult.emit(registrationResult)
+            hideProgress()
         }
     }
 }

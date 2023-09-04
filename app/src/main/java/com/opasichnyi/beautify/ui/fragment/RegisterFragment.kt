@@ -19,7 +19,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
         super.onViewCreated(view, savedInstanceState)
 
         binding?.registerBtn?.setOnClickListener {
-            binding?.loading?.visibility = View.VISIBLE
             viewModel.tryRegister(
                 UIRegisterData(
                     login = binding?.loginEt?.text.toString(),
@@ -41,7 +40,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
         viewLifecycleOwner.repeatOnStart {
             viewModel.registrationResult.collect {
-                binding.loading.visibility = View.INVISIBLE
                 when (it) {
                     is UIRegisterResult.Error -> setValidationResult(it.validationResult)
                     is UIRegisterResult.Success -> showHomeScreen(it.user)

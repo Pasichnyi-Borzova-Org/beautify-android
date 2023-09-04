@@ -72,7 +72,8 @@ class MockAccountDataSource(
 
     private fun getAllUsers(): List<UserAccount> {
         val registeredUsers = sharedPreferences.getString(REGISTERED_USERS_TAG, null)
-        return gson.fromJson<MutableList<UserAccount>?>(registeredUsers, LIST_TYPE) ?: accountsList
+        return gson.fromJson<MutableList<UserAccount>?>(registeredUsers, USERS_LIST_TYPE)
+            ?: accountsList
     }
 
     private fun saveUsers(list: List<UserAccount>) {
@@ -82,31 +83,37 @@ class MockAccountDataSource(
         }
     }
 
-
     companion object {
 
         const val REGISTERED_USERS_TAG = "REGISTERED_USERS"
-        private val LIST_TYPE: Type = object : TypeToken<MutableList<UserAccount>?>() {}.type
+
+        private val USERS_LIST_TYPE: Type = object : TypeToken<MutableList<UserAccount>?>() {}.type
+
+        val userPasichnyi = UserAccount(
+            login = "pasichnyi",
+            name = "Oleksandr",
+            surname = "Pasichnyi",
+            role = UserRole.CLIENT,
+        )
+
+        val userBorzova = UserAccount(
+            login = "borzova",
+            name = "Yeseniia",
+            surname = "Borzova",
+            role = UserRole.CLIENT,
+        )
+
+        val userMaster = UserAccount(
+            login = "somemaster",
+            name = "Master",
+            surname = "Kekus",
+            role = UserRole.MASTER,
+        )
 
         val accountsList = mutableListOf(
-            UserAccount(
-                login = "pasichnyi",
-                name = "Oleksandr",
-                surname = "Pasichnyi",
-                role = UserRole.CLIENT,
-            ),
-            UserAccount(
-                login = "borzova",
-                name = "Yeseniia",
-                surname = "Borzova",
-                role = UserRole.CLIENT,
-            ),
-            UserAccount(
-                login = "somemaster",
-                name = "Master",
-                surname = "Kekus",
-                role = UserRole.MASTER,
-            ),
+            userPasichnyi,
+            userBorzova,
+            userMaster,
         )
     }
 }

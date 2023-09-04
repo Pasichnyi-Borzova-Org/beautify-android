@@ -1,4 +1,4 @@
-package com.opasichnyi.beautify.data.repository.iface
+package com.opasichnyi.beautify.domain.repository
 
 import com.opasichnyi.beautify.domain.entity.RegisterData
 import com.opasichnyi.beautify.domain.entity.RegisterResult

@@ -1,7 +1,7 @@
 package com.opasichnyi.beautify.presentation.viewmodel
 
-import com.opasichnyi.beautify.data.repository.iface.UserRepository
 import com.opasichnyi.beautify.domain.entity.UserAccount
+import com.opasichnyi.beautify.domain.repository.UserRepository
 import com.opasichnyi.beautify.presentation.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
