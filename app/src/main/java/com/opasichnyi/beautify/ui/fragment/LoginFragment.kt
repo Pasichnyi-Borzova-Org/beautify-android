@@ -27,7 +27,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
         binding?.loginBtn?.setOnClickListener {
             binding?.loginErrorTv?.visibility = View.INVISIBLE
-            binding?.loading?.visibility = View.VISIBLE
             viewModel.login(
                 binding?.usernameEt?.text.toString(),
                 binding?.passwordEt?.text.toString()
@@ -41,10 +40,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         viewLifecycleOwner.repeatOnStart {
             viewModel.loginResultFlow.collect { result ->
                 if (result.isSuccess) {
-                    binding.loading.visibility = View.INVISIBLE
                     showHomePage(result.getOrThrow())
                 } else {
-                    binding.loading.visibility = View.INVISIBLE
                     showWrongCredentialsWarning()
                 }
             }

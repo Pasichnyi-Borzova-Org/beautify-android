@@ -16,6 +16,8 @@ class LoginViewModel(
     val loginResultFlow: SharedFlow<Result<UserAccount>> = _loginResultFlow.asSharedFlow()
 
     fun login(login: String, password: String) = scope.launch {
+        showProgress()
         _loginResultFlow.emit(loginInteractor(login, password))
+        hideProgress()
     }
 }

@@ -19,4 +19,8 @@
     <color name="black">@android:color/black</color>
     <color name="divider">#E9E9E9</color>
 
+    <!-- Custom -->
+    <color name="positive_green">#62f55b</color>
+    <color name="negative_red">#eb4034</color>
+
 </resources>

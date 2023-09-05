@@ -17,7 +17,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         binding?.bottomNavigation?.setOnItemSelectedListener(navListener)
 
         childFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, EventsListFragment()).commit()
+            .replace(R.id.fragment_container, AppointmentsListFragment()).commit()
     }
 
     private val navListener = NavigationBarView.OnItemSelectedListener {
@@ -31,7 +31,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 //  When create calendar view - change to fragment,
                 //  which is parent to List anc Calendar (with picker for view)
                 //  ")
-                selectedFragment = EventsListFragment()
+                selectedFragment = AppointmentsListFragment()
             }
 
             R.id.search -> {

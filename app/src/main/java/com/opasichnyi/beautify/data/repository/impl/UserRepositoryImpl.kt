@@ -2,10 +2,10 @@ package com.opasichnyi.beautify.data.repository.impl
 
 import com.opasichnyi.beautify.data.datasource.LoggedInUserDatasource
 import com.opasichnyi.beautify.data.datasource.mock.MockAccountDataSource
-import com.opasichnyi.beautify.data.repository.iface.UserRepository
 import com.opasichnyi.beautify.domain.entity.RegisterData
 import com.opasichnyi.beautify.domain.entity.RegisterResult
 import com.opasichnyi.beautify.domain.entity.UserAccount
+import com.opasichnyi.beautify.domain.repository.UserRepository
 
 class UserRepositoryImpl(
     private val loggedInUserDatasource: LoggedInUserDatasource,

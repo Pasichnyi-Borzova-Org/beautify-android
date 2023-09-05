@@ -1,7 +1,6 @@
 package com.opasichnyi.beautify.ui.activity
 
 import android.os.Bundle
-import android.util.Log
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.opasichnyi.beautify.databinding.ActivityMainBinding
 import com.opasichnyi.beautify.domain.entity.UserAccount
@@ -26,7 +25,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     }
 
     private fun handleNavigation(userAccount: UserAccount?) {
-        Log.e("MainActivity", "handleNavigation")
         isNavigated = true
         if (userAccount == null) {
             showLoginActivity()
