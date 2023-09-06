@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Beautify</string>
-    <!-- Strings related to login -->
     <string name="prompt_login">Login</string>
     <string name="prompt_password">Password</string>
     <string name="action_log_in">Log in</string>
@@ -21,7 +20,7 @@
     <string name="password_short_message">Password should be longer than 7 digits</string>
     <string name="passwords_different_message">This password differs from original</string>
     <string name="i_am_a_master_text">I am a master</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="progress_message">Loading</string>
+    <string name="time_content_description">Time</string>
+    <string name="appointment_date_time_format">%1$s : %2$s - %3$s</string>
 </resources>

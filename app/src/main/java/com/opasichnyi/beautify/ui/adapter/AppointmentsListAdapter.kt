@@ -44,7 +44,12 @@ class AppointmentsListAdapter(
                     priceTv.setTextColor(context.getColor(R.color.positive_green))
                 }
                 titleTv.text = item.title
-                appointmentTimeTv.text = item.startTime
+                appointmentTimeTv.text = context.getString(
+                    R.string.appointment_date_time_format,
+                    item.date,
+                    item.startTime,
+                    item.endTime
+                )
                 partnerNameTv.text = item.partnerUsername
                 priceTv.text = item.price
             }

@@ -7,6 +7,7 @@ import java.util.Date
 // TODO("Make sealed if some differences between incoming and outcoming appointments")
 @Parcelize
 data class Appointment(
+    val id: Long,
     val title: String,
     val partnerUsername: String,
     val loggedInUserRole: UserRole,

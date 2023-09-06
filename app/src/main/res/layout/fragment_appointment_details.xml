@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/titleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="My custom title" />
+
+    <ImageView
+        android:id="@+id/timeIcon"
+        android:layout_width="20sp"
+        android:layout_height="20sp"
+        android:layout_marginTop="8sp"
+        android:contentDescription="@string/time_content_description"
+        android:src="@drawable/outline_access_time_24"
+        app:layout_constraintStart_toStartOf="@+id/titleTv"
+        app:layout_constraintTop_toBottomOf="@+id/titleTv" />
+
+    <TextView
+        android:id="@+id/timeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@+id/timeIcon"
+        app:layout_constraintTop_toTopOf="@+id/timeIcon"
+        tools:text="23.09.2023 -- 15:00-16:00" />
+
+    <ImageView
+        android:id="@+id/userIcon"
+        android:layout_width="20sp"
+        android:layout_height="20sp"
+        android:layout_marginTop="8sp"
+        android:contentDescription="@string/time_content_description"
+        android:src="@drawable/outline_account_circle_24"
+        app:layout_constraintStart_toStartOf="@+id/timeIcon"
+        app:layout_constraintTop_toBottomOf="@+id/timeIcon" />
+
+    <TextView
+        android:id="@+id/userTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@+id/userIcon"
+        app:layout_constraintTop_toTopOf="@+id/userIcon"
+        tools:text="Ludmila Ulianova" />
+
+    <ImageView
+        android:id="@+id/descriptionIcon"
+        android:layout_width="20sp"
+        android:layout_height="20sp"
+        android:layout_marginTop="8sp"
+        android:contentDescription="@string/time_content_description"
+        android:src="@drawable/outline_description_24"
+        app:layout_constraintStart_toStartOf="@+id/userIcon"
+        app:layout_constraintTop_toBottomOf="@+id/userIcon" />
+
+    <TextView
+        android:id="@+id/descriptionTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@+id/descriptionIcon"
+        app:layout_constraintTop_toTopOf="@+id/descriptionIcon"
+        tools:text="List of work:\n-nail polish\n-make a design with strawberries from the chat" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

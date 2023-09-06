@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.lenovo.smartoffice.common.util.extension.lifecycle.repeatOnStart
+import com.opasichnyi.beautify.R
 import com.opasichnyi.beautify.databinding.FragmentEventsListBinding
-import com.opasichnyi.beautify.presentation.entity.UIAppointment
 import com.opasichnyi.beautify.presentation.viewmodel.AppointmentsViewModel
 import com.opasichnyi.beautify.ui.adapter.AppointmentsListAdapter
 import com.opasichnyi.beautify.ui.base.BaseFragment
+
 
 class AppointmentsListFragment : BaseFragment<FragmentEventsListBinding, AppointmentsViewModel>() {
 
@@ -21,7 +21,7 @@ class AppointmentsListFragment : BaseFragment<FragmentEventsListBinding, Appoint
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        adapter = AppointmentsListAdapter(::onOpenAppointmentInfo, requireContext())
+        adapter = AppointmentsListAdapter(viewModel::onAppointmentSelected, requireContext())
         binding?.appointmentsRecyclerView?.adapter = adapter
         return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -32,10 +32,21 @@ class AppointmentsListFragment : BaseFragment<FragmentEventsListBinding, Appoint
     ) {
         super.listenViewModel(viewModel, binding)
 
-        viewLifecycleOwner.repeatOnStart {
+        repeatOnStart {
             viewModel.upcomingAppointmentsFlow.collect { list ->
                 adapter.submitList(list)
                 binding.appointmentsRecyclerView.adapter = adapter
+            }
+        }
+
+        repeatOnStart {
+            viewModel.selectedAppointmentFlow.collect { appointment ->
+                parentFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.fragment_container, AppointmentDetailsFragment.newInstance(appointment)
+                    )
+                    .addToBackStack("details")
+                    .commit()
             }
         }
     }
@@ -45,10 +56,4 @@ class AppointmentsListFragment : BaseFragment<FragmentEventsListBinding, Appoint
 
         viewModel.loadAppointments()
     }
-
-    private fun onOpenAppointmentInfo(appointment: UIAppointment) {
-        // TODO(Add in BTF-10 - Appointment Details Screen)
-        Toast.makeText(requireContext(), "open ${appointment.title}", Toast.LENGTH_LONG).show()
-    }
-
 }

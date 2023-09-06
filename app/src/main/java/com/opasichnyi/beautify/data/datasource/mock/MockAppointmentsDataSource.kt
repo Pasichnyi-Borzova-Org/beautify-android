@@ -50,6 +50,7 @@ class MockAppointmentsDataSource(
 
         val appointmentsList = mutableListOf(
             DataAppointment(
+                id = 1,
                 title = "Yasya 1",
                 masterUserName = MockAccountDataSource.userMaster.login,
                 clientUserName = MockAccountDataSource.userBorzova.login,
@@ -59,6 +60,7 @@ class MockAppointmentsDataSource(
                 description = "test description 1"
             ),
             DataAppointment(
+                id = 2,
                 title = "Sasha 1",
                 masterUserName = MockAccountDataSource.userMaster.login,
                 clientUserName = MockAccountDataSource.userPasichnyi.login,
@@ -68,6 +70,7 @@ class MockAppointmentsDataSource(
                 description = "test description 1"
             ),
             DataAppointment(
+                id = 3,
                 title = "Sasha 2",
                 masterUserName = MockAccountDataSource.userMaster.login,
                 clientUserName = MockAccountDataSource.userPasichnyi.login,
@@ -77,6 +80,7 @@ class MockAppointmentsDataSource(
                 description = "test description 1"
             ),
             DataAppointment(
+                id = 4,
                 title = "Yasya 2",
                 masterUserName = MockAccountDataSource.userMaster.login,
                 clientUserName = MockAccountDataSource.userBorzova.login,
@@ -86,6 +90,7 @@ class MockAppointmentsDataSource(
                 description = "test description 1"
             ),
             DataAppointment(
+                id = 5,
                 title = "Yasya 3",
                 masterUserName = MockAccountDataSource.userMaster.login,
                 clientUserName = MockAccountDataSource.userBorzova.login,
@@ -95,6 +100,7 @@ class MockAppointmentsDataSource(
                 description = "test description 1"
             ),
             DataAppointment(
+                id = 6,
                 title = "Sasha 2",
                 masterUserName = MockAccountDataSource.userMaster.login,
                 clientUserName = MockAccountDataSource.userPasichnyi.login,
