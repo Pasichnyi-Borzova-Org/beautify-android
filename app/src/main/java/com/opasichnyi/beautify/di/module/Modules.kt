@@ -14,6 +14,7 @@ import com.opasichnyi.beautify.domain.repository.UserRepository
 import com.opasichnyi.beautify.presentation.mapper.DomainAppointmentToUIAppointmentMapper
 import com.opasichnyi.beautify.presentation.mapper.DomainRegistrationResultToUIMapper
 import com.opasichnyi.beautify.presentation.mapper.UIRegisterDataToDomainMapper
+import com.opasichnyi.beautify.presentation.viewmodel.AppointmentDetailsViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.AppointmentsViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.HomeActivityViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.HomeViewModel
@@ -110,6 +111,12 @@ private val viewModelModule = module {
     viewModel {
         AppointmentsViewModel(
             getUpcomingAppointmentsInteractor = get(),
+            appointmentMapper = get()
+        )
+    }
+
+    viewModel {
+        AppointmentDetailsViewModel(
             appointmentMapper = get()
         )
     }

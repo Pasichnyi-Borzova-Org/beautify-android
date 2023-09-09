@@ -38,7 +38,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
     override fun listenViewModel(viewModel: RegisterViewModel, binding: FragmentRegisterBinding) {
         super.listenViewModel(viewModel, binding)
 
-        viewLifecycleOwner.repeatOnStart {
+        repeatOnStart {
             viewModel.registrationResult.collect {
                 when (it) {
                     is UIRegisterResult.Error -> setValidationResult(it.validationResult)

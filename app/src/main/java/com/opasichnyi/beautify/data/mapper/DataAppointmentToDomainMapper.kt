@@ -34,6 +34,7 @@ class DataAppointmentToDomainMapper {
         }
 
         return Appointment(
+            id = dataAppointment.id,
             title = dataAppointment.title,
             partnerUsername = partnerUsername,
             loggedInUserRole = currentUserRole,

@@ -37,7 +37,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     override fun listenViewModel(viewModel: LoginViewModel, binding: FragmentLoginBinding) {
         super.listenViewModel(viewModel, binding)
 
-        viewLifecycleOwner.repeatOnStart {
+        repeatOnStart {
             viewModel.loginResultFlow.collect { result ->
                 if (result.isSuccess) {
                     showHomePage(result.getOrThrow())
