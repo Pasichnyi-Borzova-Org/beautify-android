@@ -16,7 +16,6 @@ import com.opasichnyi.beautify.presentation.mapper.DomainRegistrationResultToUIM
 import com.opasichnyi.beautify.presentation.mapper.UIRegisterDataToDomainMapper
 import com.opasichnyi.beautify.presentation.viewmodel.AppointmentDetailsViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.AppointmentsViewModel
-import com.opasichnyi.beautify.presentation.viewmodel.HomeActivityViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.HomeViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.LoginActivityViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.LoginViewModel
@@ -81,7 +80,7 @@ private val viewModelModule = module {
     }
 
     viewModel {
-        HomeActivityViewModel()
+        HomeViewModel()
     }
 
     viewModel {
@@ -91,12 +90,6 @@ private val viewModelModule = module {
     viewModel {
         LoginViewModel(
             loginInteractor = get()
-        )
-    }
-
-    viewModel {
-        HomeViewModel(
-            repository = get()
         )
     }
 

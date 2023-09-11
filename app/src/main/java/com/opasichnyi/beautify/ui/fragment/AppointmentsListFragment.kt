@@ -4,15 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.lenovo.smartoffice.common.util.extension.lifecycle.repeatOnStart
 import com.opasichnyi.beautify.R
-import com.opasichnyi.beautify.databinding.FragmentEventsListBinding
+import com.opasichnyi.beautify.databinding.FragmentAppointmentsListBinding
 import com.opasichnyi.beautify.presentation.viewmodel.AppointmentsViewModel
 import com.opasichnyi.beautify.ui.adapter.AppointmentsListAdapter
 import com.opasichnyi.beautify.ui.base.BaseFragment
+import com.opasichnyi.beautify.util.ext.navigateActionSafe
 
 
-class AppointmentsListFragment : BaseFragment<FragmentEventsListBinding, AppointmentsViewModel>() {
+class AppointmentsListFragment : BaseFragment<FragmentAppointmentsListBinding, AppointmentsViewModel>() {
 
     private lateinit var adapter: AppointmentsListAdapter
 
@@ -28,7 +30,7 @@ class AppointmentsListFragment : BaseFragment<FragmentEventsListBinding, Appoint
 
     override fun listenViewModel(
         viewModel: AppointmentsViewModel,
-        binding: FragmentEventsListBinding
+        binding: FragmentAppointmentsListBinding
     ) {
         super.listenViewModel(viewModel, binding)
 
@@ -41,19 +43,16 @@ class AppointmentsListFragment : BaseFragment<FragmentEventsListBinding, Appoint
 
         repeatOnStart {
             viewModel.selectedAppointmentFlow.collect { appointment ->
-                parentFragmentManager.beginTransaction()
-                    .replace(
-                        R.id.fragment_container, AppointmentDetailsFragment.newInstance(appointment)
-                    )
-                    .addToBackStack("details")
-                    .commit()
+                val action = AppointmentsListFragmentDirections.actionAppointmentsFragmentToAppointmentDetailsFragment(
+                    appointment
+                )
+                findNavController().navigateActionSafe(action)
             }
         }
     }
 
     override fun onResume() {
         super.onResume()
-
         viewModel.loadAppointments()
     }
 }
