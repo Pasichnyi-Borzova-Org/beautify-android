@@ -10,8 +10,7 @@ import java.util.Calendar
 class AppointmentsRepositoryImpl(
     private val appointmentsDataSource: MockAppointmentsDataSource,
     private val loggedInUserDatasource: LoggedInUserDatasource,
-
-    ) : AppointmentsRepository {
+) : AppointmentsRepository {
 
     override suspend fun getUpcomingAppointments(): List<Appointment> {
         val loggedInUsername = loggedInUserDatasource.getLoggedInUser()

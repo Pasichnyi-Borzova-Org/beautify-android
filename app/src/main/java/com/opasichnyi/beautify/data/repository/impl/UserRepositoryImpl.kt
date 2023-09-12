@@ -29,15 +29,13 @@ class UserRepositoryImpl(
         return userResult
     }
 
-    override suspend fun logoutUser() {
+    override suspend fun logoutUser() =
         loggedInUserDatasource.deleteLoggedInUser()
-    }
 
-    override suspend fun registerUser(registerData: RegisterData): RegisterResult {
-        return accountDataSource.registerUser(registerData).also {
+    override suspend fun registerUser(registerData: RegisterData): RegisterResult =
+        accountDataSource.registerUser(registerData).also {
             if (it is RegisterResult.Success) {
                 loggedInUserDatasource.saveLoggedInUser(registerData.login)
             }
         }
-    }
 }

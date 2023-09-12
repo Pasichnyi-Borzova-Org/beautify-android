@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import java.util.Date
 
-// TODO("Make sealed if some differences between incoming and outcoming appointments")
+// TODO("Make sealed if some differences between master and client appointments")
 @Parcelize
 data class Appointment(
     val id: Long,
@@ -15,5 +15,5 @@ data class Appointment(
     val endTime: Date,
     // TODO("Add different currencies (BTF-12)")
     val price: Double,
-    val description: String
+    val description: String,
 ) : Parcelable

@@ -27,21 +27,18 @@ class LoggedInUserDatasource(
         )
     }
 
-    fun saveLoggedInUser(username: String) {
+    fun saveLoggedInUser(username: String) =
         sharedPreferences.edit {
             putString(LOGIN_USERNAME_TAG, username)
         }
-    }
 
-    fun deleteLoggedInUser() {
+    fun deleteLoggedInUser() =
         sharedPreferences.edit {
             remove(LOGIN_USERNAME_TAG)
         }
-    }
 
-    fun getLoggedInUser(): String? {
-        return sharedPreferences.getString(LOGIN_USERNAME_TAG, null)
-    }
+    fun getLoggedInUser(): String? =
+        sharedPreferences.getString(LOGIN_USERNAME_TAG, null)
 
     companion object {
 

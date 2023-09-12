@@ -29,7 +29,7 @@ private val dataModule = module {
 
     single {
         LoggedInUserDatasource(
-            context = androidContext()
+            context = androidContext(),
         )
     }
 
@@ -48,7 +48,7 @@ private val dataModule = module {
     single<UserRepository> {
         UserRepositoryImpl(
             loggedInUserDatasource = get(),
-            accountDataSource = get()
+            accountDataSource = get(),
         )
     }
 
@@ -75,7 +75,7 @@ private val viewModelModule = module {
 
     viewModel {
         MainActivityViewModel(
-            loggedInUserInteractor = get()
+            loggedInUserInteractor = get(),
         )
     }
 
@@ -89,7 +89,7 @@ private val viewModelModule = module {
 
     viewModel {
         LoginViewModel(
-            loginInteractor = get()
+            loginInteractor = get(),
         )
     }
 
@@ -104,13 +104,13 @@ private val viewModelModule = module {
     viewModel {
         AppointmentsViewModel(
             getUpcomingAppointmentsInteractor = get(),
-            appointmentMapper = get()
+            appointmentMapper = get(),
         )
     }
 
     viewModel {
         AppointmentDetailsViewModel(
-            appointmentMapper = get()
+            appointmentMapper = get(),
         )
     }
 }

@@ -36,35 +36,9 @@ open class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatActivit
 
         binding.also {
             setContentView(it.root)
-
             onViewBound(it, savedInstanceState)
             listenViewModel(viewModel, binding)
         }
-    }
-
-    private fun setupProgressDialog() {
-        progressDialog = MaterialAlertDialogBuilder(this)
-            .setView(R.layout.progress_dialog)
-            .setCancelable(false)
-            .setBackground(ColorDrawable(Color.TRANSPARENT))
-            .create()
-    }
-
-    open fun showError(errorMessage: String) {
-
-        Snackbar.make(
-            findViewById<View>(android.R.id.content).rootView,
-            errorMessage,
-            Snackbar.LENGTH_LONG
-        ).show()
-    }
-
-    open fun showProgress() {
-        progressDialog.show()
-    }
-
-    open fun hideProgress() {
-        progressDialog.cancel()
     }
 
     @CallSuper
@@ -80,12 +54,35 @@ open class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatActivit
         }
 
         repeatOnStart {
-
             viewModel.errorStateFlow.collect {
                 if (it != null) {
                     showError(it)
                 }
             }
         }
+    }
+
+    open fun showError(errorMessage: String) {
+        Snackbar.make(
+            findViewById<View>(android.R.id.content).rootView,
+            errorMessage,
+            Snackbar.LENGTH_LONG
+        ).show()
+    }
+
+    open fun showProgress() {
+        progressDialog.show()
+    }
+
+    open fun hideProgress() {
+        progressDialog.cancel()
+    }
+
+    private fun setupProgressDialog() {
+        progressDialog = MaterialAlertDialogBuilder(this)
+            .setView(R.layout.progress_dialog)
+            .setCancelable(false)
+            .setBackground(ColorDrawable(Color.TRANSPARENT))
+            .create()
     }
 }

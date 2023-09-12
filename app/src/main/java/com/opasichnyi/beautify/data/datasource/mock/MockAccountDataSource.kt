@@ -19,23 +19,19 @@ class MockAccountDataSource(
     context: Context,
 ) {
 
-    private var sharedPreferences: SharedPreferences
+    private val masterKey: MasterKey = MasterKey.Builder(context)
+        .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+        .build()
+
+    private val sharedPreferences: SharedPreferences = EncryptedSharedPreferences.create(
+        context,
+        "secret_shared_prefs",
+        masterKey,
+        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+    )
 
     private val gson = Gson()
-
-    init {
-        val masterKey: MasterKey = MasterKey.Builder(context)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
-
-        sharedPreferences = EncryptedSharedPreferences.create(
-            context,
-            "secret_shared_prefs",
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
-    }
 
     suspend fun getAccountByUsername(username: String): UserAccount {
         delay(3000)
@@ -56,8 +52,8 @@ class MockAccountDataSource(
     suspend fun registerUser(registerData: RegisterData): RegisterResult {
         delay(3000)
         val currentList = getAllUsers()
-        if (currentList.any { it.login == registerData.login }) {
-            return RegisterResult.Error
+        return if (currentList.any { it.login == registerData.login }) {
+            RegisterResult.Error
         } else {
             val newAccount = UserAccount(
                 login = registerData.login,
@@ -66,7 +62,7 @@ class MockAccountDataSource(
                 role = registerData.role
             )
             saveUsers(currentList + newAccount)
-            return RegisterResult.Success(newAccount)
+            RegisterResult.Success(newAccount)
         }
     }
 

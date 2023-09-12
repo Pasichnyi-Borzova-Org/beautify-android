@@ -1,6 +1,5 @@
 package com.opasichnyi.beautify.ui.fragment
 
-import android.os.Bundle
 import androidx.navigation.fragment.navArgs
 import com.lenovo.smartoffice.common.util.extension.lifecycle.repeatOnStart
 import com.opasichnyi.beautify.R

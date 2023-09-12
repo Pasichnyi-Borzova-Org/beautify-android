@@ -1,6 +1,5 @@
 package com.opasichnyi.beautify.ui.base
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -38,10 +37,6 @@ open class BaseFragment<VB : ViewBinding, VM : BaseViewModel> :
     protected open val themeRes: Int =
         android.R.style.Theme_Material_Light_DarkActionBar
 
-    override fun onGetLayoutInflater(savedInstanceState: Bundle?): LayoutInflater =
-        super.onGetLayoutInflater(savedInstanceState)
-            .cloneInContext(ContextThemeWrapper(requireContext(), themeRes))
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -62,31 +57,9 @@ open class BaseFragment<VB : ViewBinding, VM : BaseViewModel> :
         }
     }
 
-    private fun initBackPressListener() {
-        val onBackPressedCallback = OnBackPressedCallbackWrapper(true, ::onBackPressed)
-
-        viewLifecycleOwner.launchOnLifecycleAnyEvent { event ->
-            onBackPressedCallback.isEnabled = event == Lifecycle.Event.ON_RESUME
-        }
-
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            onBackPressedCallback
-        )
-    }
-
-    protected open fun onBackPressed() {
-        findNavController().apply {
-            if (previousBackStackEntry != null) navigateUp() else requireActivity().finish()
-        }
-    }
-
-    @CheckResult
-    fun requireBackStackEntry(): NavBackStackEntry =
-        findNavController().currentBackStackEntry
-            ?: throw IllegalStateException(
-                "Current NavBackStackEntry in fragment $this is null"
-            )
+    override fun onGetLayoutInflater(savedInstanceState: Bundle?): LayoutInflater =
+        super.onGetLayoutInflater(savedInstanceState)
+            .cloneInContext(ContextThemeWrapper(requireContext(), themeRes))
 
     @CallSuper
     override fun listenViewModel(viewModel: VM, binding: VB) {
@@ -110,9 +83,12 @@ open class BaseFragment<VB : ViewBinding, VM : BaseViewModel> :
         }
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
+    @CheckResult
+    fun requireBackStackEntry(): NavBackStackEntry =
+        findNavController().currentBackStackEntry
+            ?: throw IllegalStateException(
+                "Current NavBackStackEntry in fragment $this is null"
+            )
 
     open fun showError(errorMessage: String) {
         getBaseActivity().showError(errorMessage)
@@ -129,6 +105,25 @@ open class BaseFragment<VB : ViewBinding, VM : BaseViewModel> :
     @CheckResult
     protected fun requireBinding(): VB =
         binding ?: throw IllegalStateException("Binding in fragment $this is null")
+
+    protected open fun onBackPressed() {
+        findNavController().apply {
+            if (previousBackStackEntry != null) navigateUp() else requireActivity().finish()
+        }
+    }
+
+    private fun initBackPressListener() {
+        val onBackPressedCallback = OnBackPressedCallbackWrapper(true, ::onBackPressed)
+
+        viewLifecycleOwner.launchOnLifecycleAnyEvent { event ->
+            onBackPressedCallback.isEnabled = event == Lifecycle.Event.ON_RESUME
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            onBackPressedCallback
+        )
+    }
 
     private fun getBaseActivity() = (requireActivity() as BaseActivity<*, *>)
 }

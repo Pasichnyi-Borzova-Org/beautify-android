@@ -11,5 +11,5 @@ data class UIAppointment(
     val startTime: String,
     val endTime: String,
     val price: String,
-    val description: String
+    val description: String,
 )

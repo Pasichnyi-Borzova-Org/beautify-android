@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 class RegisterViewModel(
     private val registrationInteractor: RegistrationInteractor,
     private val uiRegisterDataToDomainMapper: UIRegisterDataToDomainMapper,
-    private val domainRegistrationResultToUIMapper: DomainRegistrationResultToUIMapper
+    private val domainRegistrationResultToUIMapper: DomainRegistrationResultToUIMapper,
 ) : BaseViewModel() {
 
     private val _registrationResult: MutableSharedFlow<UIRegisterResult> = MutableSharedFlow()
