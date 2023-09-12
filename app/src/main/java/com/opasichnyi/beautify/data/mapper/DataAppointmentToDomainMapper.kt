@@ -14,7 +14,7 @@ class DataAppointmentToDomainMapper {
 
     fun mapDataAppointmentToDomain(
         dataAppointment: DataAppointment,
-        loggedInUsername: String
+        loggedInUsername: String,
     ): Appointment {
 
         require(dataAppointment.clientUserName != dataAppointment.masterUserName)

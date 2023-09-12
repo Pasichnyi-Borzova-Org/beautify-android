@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.lenovo.smartoffice.common.util.extension.lifecycle.repeatOnStart
-import com.opasichnyi.beautify.R
 import com.opasichnyi.beautify.databinding.FragmentAppointmentsListBinding
 import com.opasichnyi.beautify.presentation.viewmodel.AppointmentsViewModel
 import com.opasichnyi.beautify.ui.adapter.AppointmentsListAdapter
@@ -14,7 +13,8 @@ import com.opasichnyi.beautify.ui.base.BaseFragment
 import com.opasichnyi.beautify.util.ext.navigateActionSafe
 
 
-class AppointmentsListFragment : BaseFragment<FragmentAppointmentsListBinding, AppointmentsViewModel>() {
+class AppointmentsListFragment :
+    BaseFragment<FragmentAppointmentsListBinding, AppointmentsViewModel>() {
 
     private lateinit var adapter: AppointmentsListAdapter
 
@@ -35,7 +35,7 @@ class AppointmentsListFragment : BaseFragment<FragmentAppointmentsListBinding, A
         super.listenViewModel(viewModel, binding)
 
         repeatOnStart {
-            viewModel.upcomingAppointmentsFlow.collect { list ->
+            viewModel.appointmentsFlow.collect { list ->
                 adapter.submitList(list)
                 binding.appointmentsRecyclerView.adapter = adapter
             }
@@ -43,9 +43,10 @@ class AppointmentsListFragment : BaseFragment<FragmentAppointmentsListBinding, A
 
         repeatOnStart {
             viewModel.selectedAppointmentFlow.collect { appointment ->
-                val action = AppointmentsListFragmentDirections.actionAppointmentsFragmentToAppointmentDetailsFragment(
-                    appointment
-                )
+                val action =
+                    AppointmentsListFragmentDirections.actionAppointmentsFragmentToAppointmentDetailsFragment(
+                        appointment
+                    )
                 findNavController().navigateActionSafe(action)
             }
         }

@@ -19,6 +19,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         setOnClickListeners()
     }
 
+    override fun listenViewModel(viewModel: LoginViewModel, binding: FragmentLoginBinding) {
+        super.listenViewModel(viewModel, binding)
+
+        repeatOnStart {
+            viewModel.loginResultFlow.collect { result ->
+                if (result.isSuccess) {
+                    showHomePage(result.getOrThrow())
+                } else {
+                    showWrongCredentialsWarning()
+                }
+            }
+        }
+    }
+
     private fun setOnClickListeners() {
 
         binding?.registerTv?.setOnClickListener {
@@ -31,20 +45,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                 binding?.usernameEt?.text.toString(),
                 binding?.passwordEt?.text.toString()
             )
-        }
-    }
-
-    override fun listenViewModel(viewModel: LoginViewModel, binding: FragmentLoginBinding) {
-        super.listenViewModel(viewModel, binding)
-
-        repeatOnStart {
-            viewModel.loginResultFlow.collect { result ->
-                if (result.isSuccess) {
-                    showHomePage(result.getOrThrow())
-                } else {
-                    showWrongCredentialsWarning()
-                }
-            }
         }
     }
 

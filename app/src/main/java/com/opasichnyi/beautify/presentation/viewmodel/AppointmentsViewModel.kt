@@ -15,9 +15,9 @@ class AppointmentsViewModel(
     private val appointmentMapper: DomainAppointmentToUIAppointmentMapper,
 ) : BaseViewModel() {
 
-    private val _upcomingAppointments = MutableSharedFlow<List<UIAppointment>>()
-    val upcomingAppointmentsFlow: SharedFlow<List<UIAppointment>> =
-        _upcomingAppointments.asSharedFlow()
+    private val _appointmentsFlow = MutableSharedFlow<List<UIAppointment>>()
+    val appointmentsFlow: SharedFlow<List<UIAppointment>> =
+        _appointmentsFlow.asSharedFlow()
 
     private val _selectedAppointmentFlow = MutableSharedFlow<Appointment>()
     val selectedAppointmentFlow: SharedFlow<Appointment> =
@@ -28,13 +28,13 @@ class AppointmentsViewModel(
     fun loadAppointments() {
         scope.launch {
             if (appointments.isNotEmpty()) {
-                _upcomingAppointments.emit(
+                _appointmentsFlow.emit(
                     appointments.map(appointmentMapper::mapDomainAppointmentToUI)
                 )
             } else {
                 showProgress()
 
-                _upcomingAppointments.emit(
+                _appointmentsFlow.emit(
                     getUpcomingAppointmentsInteractor()
                         .also { appointments = it }
                         .map(
@@ -48,6 +48,9 @@ class AppointmentsViewModel(
     }
 
     fun onAppointmentSelected(appointment: UIAppointment) = scope.launch {
-        _selectedAppointmentFlow.emit(appointments.first { it.id == appointment.id })
+        _selectedAppointmentFlow
+            .emit(
+                appointments.first { it.id == appointment.id }
+            )
     }
 }

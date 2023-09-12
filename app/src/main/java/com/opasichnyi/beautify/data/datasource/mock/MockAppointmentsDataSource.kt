@@ -14,23 +14,19 @@ class MockAppointmentsDataSource(
     context: Context,
 ) {
 
-    private var sharedPreferences: SharedPreferences
+    private val masterKey: MasterKey = MasterKey.Builder(context)
+        .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+        .build()
+
+    private val sharedPreferences: SharedPreferences = EncryptedSharedPreferences.create(
+        context,
+        "secret_shared_prefs",
+        masterKey,
+        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+    )
 
     private val gson = Gson()
-
-    init {
-        val masterKey: MasterKey = MasterKey.Builder(context)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
-
-        sharedPreferences = EncryptedSharedPreferences.create(
-            context,
-            "secret_shared_prefs",
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
-    }
 
     suspend fun getAppointmentsOfUser(userName: String): List<DataAppointment> {
         delay(3_000)

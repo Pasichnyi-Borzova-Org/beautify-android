@@ -8,5 +8,5 @@ data class DataAppointment(
     val startTime: String,
     val endTime: String,
     val price: Double,
-    val description: String
+    val description: String,
 )

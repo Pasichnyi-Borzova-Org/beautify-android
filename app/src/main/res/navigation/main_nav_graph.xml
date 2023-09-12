@@ -25,7 +25,7 @@
         android:id="@+id/appointmentDetailsFragment"
         android:name="com.opasichnyi.beautify.ui.fragment.AppointmentDetailsFragment"
         android:label="details_fragment"
-        tools:layout="@layout/fragment_appointment_details" >
+        tools:layout="@layout/fragment_appointment_details">
         <argument
             android:name="appointment"
             app:argType="com.opasichnyi.beautify.domain.entity.Appointment" />

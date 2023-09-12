@@ -17,6 +17,7 @@ open class BaseViewModel : ViewModel() {
     private val _errorStateFlow: MutableStateFlow<String?> = MutableStateFlow(null)
     val errorStateFlow: StateFlow<String?> = _errorStateFlow.asStateFlow()
 
+    // TODO("Context is unused, exceptions are not handled")
     val coroutineContext = Dispatchers.Main +
             CoroutineExceptionHandler { _, exception ->
                 showError(exception.message ?: "Something went wrong")

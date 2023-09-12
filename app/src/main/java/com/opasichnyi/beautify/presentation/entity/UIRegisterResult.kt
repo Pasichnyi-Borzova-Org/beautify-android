@@ -5,7 +5,7 @@ import com.opasichnyi.beautify.domain.entity.UserAccount
 sealed class UIRegisterResult {
 
     data class Success(
-        val user: UserAccount
+        val user: UserAccount,
     ) : UIRegisterResult()
 
     data class Error(
