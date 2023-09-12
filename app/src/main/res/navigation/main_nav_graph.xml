@@ -3,12 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/appointmentsFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.opasichnyi.beautify.ui.fragment.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/appointmentsFragment"
+        android:name="com.opasichnyi.beautify.ui.fragment.AppointmentsListFragment"
+        android:label="fragment_appointments"
+        tools:layout="@layout/fragment_appointments_list">
+        <action
+            android:id="@+id/action_appointmentsFragment_to_appointmentDetailsFragment"
+            app:destination="@id/appointmentDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.opasichnyi.beautify.ui.fragment.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/appointmentDetailsFragment"
+        android:name="com.opasichnyi.beautify.ui.fragment.AppointmentDetailsFragment"
+        android:label="details_fragment"
+        tools:layout="@layout/fragment_appointment_details" >
+        <argument
+            android:name="appointment"
+            app:argType="com.opasichnyi.beautify.domain.entity.Appointment" />
+    </fragment>
 
 </navigation>
