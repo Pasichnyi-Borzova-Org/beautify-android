@@ -59,6 +59,8 @@ class MockAccountDataSource(
                 login = registerData.login,
                 name = registerData.login,
                 surname = registerData.login,
+                // TODO("Add city to the registration screen")
+                null,
                 role = registerData.role
             )
             saveUsers(currentList + newAccount)
@@ -66,7 +68,7 @@ class MockAccountDataSource(
         }
     }
 
-    private fun getAllUsers(): List<UserAccount> {
+    fun getAllUsers(): List<UserAccount> {
         val registeredUsers = sharedPreferences.getString(REGISTERED_USERS_TAG, null)
         return gson.fromJson<MutableList<UserAccount>?>(registeredUsers, USERS_LIST_TYPE)
             ?: accountsList
@@ -89,6 +91,7 @@ class MockAccountDataSource(
             login = "pasichnyi",
             name = "Oleksandr",
             surname = "Pasichnyi",
+            city = "Kharkiv",
             role = UserRole.CLIENT,
         )
 
@@ -96,6 +99,7 @@ class MockAccountDataSource(
             login = "borzova",
             name = "Yeseniia",
             surname = "Borzova",
+            city = "Kharkiv",
             role = UserRole.CLIENT,
         )
 
@@ -103,10 +107,11 @@ class MockAccountDataSource(
             login = "somemaster",
             name = "Master",
             surname = "Kekus",
+            city = "Kyiv",
             role = UserRole.MASTER,
         )
 
-        val accountsList = mutableListOf(
+        private val accountsList = mutableListOf(
             userPasichnyi,
             userBorzova,
             userMaster,

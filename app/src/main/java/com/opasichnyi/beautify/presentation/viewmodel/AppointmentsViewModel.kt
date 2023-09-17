@@ -25,27 +25,26 @@ class AppointmentsViewModel(
 
     private var appointments: List<Appointment> = emptyList()
 
-    fun loadAppointments() {
-        scope.launch {
-            if (appointments.isNotEmpty()) {
-                _appointmentsFlow.emit(
-                    appointments.map(appointmentMapper::mapDomainAppointmentToUI)
-                )
-            } else {
-                showProgress()
+    fun loadAppointments() = scope.launch {
+        if (appointments.isNotEmpty()) {
+            _appointmentsFlow.emit(
+                appointments.map(appointmentMapper::mapDomainAppointmentToUI)
+            )
+        } else {
+            showProgress()
 
-                _appointmentsFlow.emit(
-                    getUpcomingAppointmentsInteractor()
-                        .also { appointments = it }
-                        .map(
-                            appointmentMapper::mapDomainAppointmentToUI
-                        )
-                )
+            _appointmentsFlow.emit(
+                getUpcomingAppointmentsInteractor()
+                    .also { appointments = it }
+                    .map(
+                        appointmentMapper::mapDomainAppointmentToUI
+                    )
+            )
 
-                hideProgress()
-            }
+            hideProgress()
         }
     }
+
 
     fun onAppointmentSelected(appointment: UIAppointment) = scope.launch {
         _selectedAppointmentFlow

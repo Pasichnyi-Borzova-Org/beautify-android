@@ -6,6 +6,7 @@ import com.opasichnyi.beautify.data.datasource.mock.MockAppointmentsDataSource
 import com.opasichnyi.beautify.data.repository.impl.AppointmentsRepositoryImpl
 import com.opasichnyi.beautify.data.repository.impl.UserRepositoryImpl
 import com.opasichnyi.beautify.domain.interactor.GetUpcomingAppointmentsInteractor
+import com.opasichnyi.beautify.domain.interactor.GetUsersInteractor
 import com.opasichnyi.beautify.domain.interactor.LoggedInUserInteractor
 import com.opasichnyi.beautify.domain.interactor.LoginInteractor
 import com.opasichnyi.beautify.domain.interactor.RegistrationInteractor
@@ -21,6 +22,7 @@ import com.opasichnyi.beautify.presentation.viewmodel.LoginActivityViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.LoginViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.MainActivityViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.RegisterViewModel
+import com.opasichnyi.beautify.presentation.viewmodel.UsersListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -69,6 +71,8 @@ private val domainModule = module {
     single { RegistrationInteractor(userRepository = get()) }
 
     single { GetUpcomingAppointmentsInteractor(appointmentsRepository = get()) }
+
+    single { GetUsersInteractor(userRepository = get()) }
 }
 
 private val viewModelModule = module {
@@ -112,6 +116,10 @@ private val viewModelModule = module {
         AppointmentDetailsViewModel(
             appointmentMapper = get(),
         )
+    }
+
+    viewModel {
+        UsersListViewModel(getUsersInteractor = get())
     }
 }
 

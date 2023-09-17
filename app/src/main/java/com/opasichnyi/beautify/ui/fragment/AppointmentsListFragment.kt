@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.lenovo.smartoffice.common.util.extension.lifecycle.repeatOnStart
 import com.opasichnyi.beautify.databinding.FragmentAppointmentsListBinding
 import com.opasichnyi.beautify.presentation.viewmodel.AppointmentsViewModel
-import com.opasichnyi.beautify.ui.adapter.AppointmentsListAdapter
+import com.opasichnyi.beautify.ui.adapter.appointments.AppointmentsListAdapter
 import com.opasichnyi.beautify.ui.base.BaseFragment
 import com.opasichnyi.beautify.util.ext.navigateActionSafe
 

@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.opasichnyi.beautify.R
 
-class SearchFragment : Fragment() {
-    // TODO: Inherit from BaseFragment and create ViewModel
+class UserDetailsFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -16,6 +15,6 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return inflater.inflate(R.layout.fragment_user_details, container, false);
     }
 }

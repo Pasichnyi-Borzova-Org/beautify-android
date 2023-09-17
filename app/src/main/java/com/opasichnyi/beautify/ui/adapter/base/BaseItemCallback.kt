@@ -1,4 +1,4 @@
-package com.opasichnyi.beautify.ui.adapter
+package com.opasichnyi.beautify.ui.adapter.base
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
