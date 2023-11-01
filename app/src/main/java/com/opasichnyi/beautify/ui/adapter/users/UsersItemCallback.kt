@@ -1,7 +1,6 @@
 package com.opasichnyi.beautify.ui.adapter.users
 
 import com.opasichnyi.beautify.domain.entity.UserAccount
-import com.opasichnyi.beautify.presentation.entity.UIAppointment
 import com.opasichnyi.beautify.ui.adapter.base.BaseItemCallback
 
 class UsersItemCallback : BaseItemCallback<UserAccount>() {
