@@ -23,4 +23,7 @@
     <string name="progress_message">Loading</string>
     <string name="time_content_description">Time</string>
     <string name="appointment_date_time_format">%1$s : %2$s - %3$s</string>
+    <string name="name_surname_format">%1$s %2$s</string>
+
+    <string name="avatar_content_description">User avatar</string>
 </resources>

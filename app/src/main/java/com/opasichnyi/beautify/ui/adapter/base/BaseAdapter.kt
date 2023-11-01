@@ -1,4 +1,4 @@
-package com.opasichnyi.beautify.ui.adapter
+package com.opasichnyi.beautify.ui.adapter.base
 
 import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.ListAdapter

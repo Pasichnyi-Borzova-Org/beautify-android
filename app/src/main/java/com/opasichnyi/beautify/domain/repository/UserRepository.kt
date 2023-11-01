@@ -13,4 +13,6 @@ interface UserRepository {
     suspend fun logoutUser()
 
     suspend fun registerUser(registerData: RegisterData): RegisterResult
+
+    suspend fun getAllUsers(): List<UserAccount>
 }

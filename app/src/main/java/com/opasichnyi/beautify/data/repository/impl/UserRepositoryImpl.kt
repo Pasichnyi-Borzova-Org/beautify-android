@@ -38,4 +38,8 @@ class UserRepositoryImpl(
                 loggedInUserDatasource.saveLoggedInUser(registerData.login)
             }
         }
+
+    override suspend fun getAllUsers(): List<UserAccount> {
+        return accountDataSource.getAllUsers()
+    }
 }
