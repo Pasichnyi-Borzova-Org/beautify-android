@@ -32,14 +32,14 @@ class UsersListFragment : BaseFragment<FragmentUsersListBinding, UsersListViewMo
         super.listenViewModel(viewModel, binding)
 
         repeatOnStart {
-            viewModel.usersFlow.collect{list ->
+            viewModel.usersFlow.collect { list ->
                 adapter.submitList(list)
                 binding.usersRecyclerView.adapter = adapter
             }
         }
 
         repeatOnStart {
-            viewModel.selectedUserFlow.collect{user ->
+            viewModel.selectedUserFlow.collect { user ->
                 // TODO("Navigate to user details screen")
             }
         }
