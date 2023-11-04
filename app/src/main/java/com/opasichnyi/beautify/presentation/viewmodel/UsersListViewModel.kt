@@ -34,6 +34,6 @@ class UsersListViewModel(
     }
 
     fun onUserSelected(user: UserAccount) = scope.launch {
-
+        _selectedUserFlow.emit(user)
     }
 }

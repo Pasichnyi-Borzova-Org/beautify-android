@@ -1,16 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="detailsFragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/avatarImageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="20dp"
+        android:contentDescription="@string/avatar_content_description"
+        android:src="@drawable/outline_account_circle_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nameSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textSize="36sp"
+        app:layout_constraintStart_toEndOf="@id/avatarImageView"
+        app:layout_constraintTop_toTopOf="@id/avatarImageView"
+        tools:text="Ivan Ivanov" />
+
+    <ImageView
+        android:id="@+id/locationIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/baseline_location_on_24"
+        app:layout_constraintStart_toEndOf="@id/avatarImageView"
+        app:layout_constraintTop_toBottomOf="@id/nameSurname" />
+
+    <TextView
+        android:id="@+id/cityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/locationIcon"
+        app:layout_constraintStart_toEndOf="@id/locationIcon"
+        app:layout_constraintTop_toTopOf="@id/locationIcon"
+        tools:text="Kharkiv" />
+
+    <View
+        android:id="@+id/divider1"
+        android:layout_width="1dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/black"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/divider2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/locationIcon" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="1dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/black"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/divider1"
+        app:layout_constraintTop_toBottomOf="@id/locationIcon" />
+
+    <TextView
+        android:id="@+id/ordersNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@id/ordersText"
+        app:layout_constraintEnd_toStartOf="@id/divider1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/divider1"
+        tools:text="> 1K" />
+
+    <TextView
+        android:id="@+id/ordersText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="orders"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@id/divider1"
+        app:layout_constraintEnd_toStartOf="@id/divider1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ordersNum" />
+
+    <TextView
+        android:id="@+id/expNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@id/ordersText"
+        app:layout_constraintEnd_toStartOf="@id/divider2"
+        app:layout_constraintStart_toEndOf="@id/divider1"
+        app:layout_constraintTop_toTopOf="@id/divider1"
+        tools:text="5 years" />
+
+    <TextView
+        android:id="@+id/expText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="using app"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@id/divider1"
+        app:layout_constraintEnd_toStartOf="@id/divider2"
+        app:layout_constraintStart_toEndOf="@id/divider1"
+        app:layout_constraintTop_toBottomOf="@id/ordersNum" />
+
+
+    <TextView
+        android:id="@+id/ratingsNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@id/ordersText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/divider2"
+        app:layout_constraintTop_toTopOf="@id/divider1"
+        tools:text="4.5 star" />
+
+    <TextView
+        android:id="@+id/ratingsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ratings"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@id/divider1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/divider2"
+        app:layout_constraintTop_toBottomOf="@id/ordersNum" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

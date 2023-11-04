@@ -16,12 +16,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.opasichnyi.beautify.ui.fragment.UsersListFragment"
-        android:label="fragment_search"
-        tools:layout="@layout/fragment_users_list" />
-
-    <fragment
         android:id="@+id/appointmentDetailsFragment"
         android:name="com.opasichnyi.beautify.ui.fragment.AppointmentDetailsFragment"
         android:label="details_fragment"
@@ -29,6 +23,26 @@
         <argument
             android:name="appointment"
             app:argType="com.opasichnyi.beautify.domain.entity.Appointment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/usersListFragment"
+        android:name="com.opasichnyi.beautify.ui.fragment.UsersListFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_users_list">
+        <action
+            android:id="@+id/action_usersFragment_to_userDetailsFragment"
+            app:destination="@id/userDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userDetailsFragment"
+        android:name="com.opasichnyi.beautify.ui.fragment.UserDetailsFragment"
+        android:label="user_details_fragment"
+        tools:layout="@layout/fragment_user_details">
+        <argument
+            android:name="user"
+            app:argType="com.opasichnyi.beautify.domain.entity.UserAccount" />
     </fragment>
 
 </navigation>

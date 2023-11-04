@@ -4,13 +4,10 @@ import com.opasichnyi.beautify.data.entity.DataAppointment
 import com.opasichnyi.beautify.data.exception.MappingDataToDomainException
 import com.opasichnyi.beautify.domain.entity.Appointment
 import com.opasichnyi.beautify.domain.entity.UserRole
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
-class DataAppointmentToDomainMapper {
-
-    private val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
+class DataAppointmentToDomainMapper(
+    private val dateMapper: DateMapper,
+) {
 
     fun mapDataAppointmentToDomain(
         dataAppointment: DataAppointment,
@@ -38,8 +35,8 @@ class DataAppointmentToDomainMapper {
             title = dataAppointment.title,
             partnerUsername = partnerUsername,
             loggedInUserRole = currentUserRole,
-            startTime = sdf.parse(dataAppointment.startTime) as Date,
-            endTime = sdf.parse(dataAppointment.endTime) as Date,
+            startTime = dateMapper.mapStringToDate(dataAppointment.startTime),
+            endTime = dateMapper.mapStringToDate(dataAppointment.endTime),
             price = dataAppointment.price,
             description = dataAppointment.description,
         )

@@ -3,6 +3,7 @@ package com.opasichnyi.beautify.domain.repository
 import com.opasichnyi.beautify.domain.entity.RegisterData
 import com.opasichnyi.beautify.domain.entity.RegisterResult
 import com.opasichnyi.beautify.domain.entity.UserAccount
+import com.opasichnyi.beautify.domain.entity.UserInfo
 
 interface UserRepository {
 
@@ -15,4 +16,6 @@ interface UserRepository {
     suspend fun registerUser(registerData: RegisterData): RegisterResult
 
     suspend fun getAllUsers(): List<UserAccount>
+
+    suspend fun getUserInfo(userAccount: UserAccount): UserInfo
 }
