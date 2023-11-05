@@ -5,7 +5,7 @@ import com.opasichnyi.beautify.data.datasource.mock.MockAccountDataSource
 import com.opasichnyi.beautify.data.datasource.mock.MockAppointmentsDataSource
 import com.opasichnyi.beautify.data.mapper.DataAppointmentToDomainMapper
 import com.opasichnyi.beautify.data.mapper.DataUserInfoToDomainMapper
-import com.opasichnyi.beautify.data.mapper.DateMapper
+import com.opasichnyi.beautify.domain.mapper.DateMapper
 import com.opasichnyi.beautify.data.repository.impl.AppointmentsRepositoryImpl
 import com.opasichnyi.beautify.data.repository.impl.UserRepositoryImpl
 import com.opasichnyi.beautify.domain.interactor.GetUpcomingAppointmentsInteractor
@@ -14,6 +14,7 @@ import com.opasichnyi.beautify.domain.interactor.GetUsersInteractor
 import com.opasichnyi.beautify.domain.interactor.LoggedInUserInteractor
 import com.opasichnyi.beautify.domain.interactor.LoginInteractor
 import com.opasichnyi.beautify.domain.interactor.RegistrationInteractor
+import com.opasichnyi.beautify.domain.interactor.TryCreateAppointmentInteractor
 import com.opasichnyi.beautify.domain.repository.AppointmentsRepository
 import com.opasichnyi.beautify.domain.repository.UserRepository
 import com.opasichnyi.beautify.presentation.mapper.DomainAppointmentToUIAppointmentMapper
@@ -22,6 +23,7 @@ import com.opasichnyi.beautify.presentation.mapper.DomainUserInfoToUIUserInfoMap
 import com.opasichnyi.beautify.presentation.mapper.UIRegisterDataToDomainMapper
 import com.opasichnyi.beautify.presentation.viewmodel.AppointmentDetailsViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.AppointmentsViewModel
+import com.opasichnyi.beautify.presentation.viewmodel.CreateAppointmentViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.HomeViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.LoginActivityViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.LoginViewModel
@@ -50,6 +52,7 @@ private val dataModule = module {
     single {
         MockAppointmentsDataSource(
             context = get(),
+            dateMapper = get(),
         )
     }
 
@@ -57,7 +60,7 @@ private val dataModule = module {
         UserRepositoryImpl(
             loggedInUserDatasource = get(),
             accountDataSource = get(),
-            userInfoMapper = get()
+            userInfoMapper = get(),
         )
     }
 
@@ -65,7 +68,7 @@ private val dataModule = module {
         AppointmentsRepositoryImpl(
             loggedInUserDatasource = get(),
             appointmentsDataSource = get(),
-            appointmentMapper = get()
+            appointmentMapper = get(),
         )
     }
 
@@ -89,6 +92,8 @@ private val domainModule = module {
     single { GetUsersInteractor(userRepository = get()) }
 
     single { GetUserInfoInteractor(userRepository = get()) }
+
+    single { TryCreateAppointmentInteractor(appointmentsRepository = get()) }
 }
 
 private val viewModelModule = module {
@@ -141,6 +146,14 @@ private val viewModelModule = module {
     viewModel {
         UserDetailsViewModel(getUserInfoInteractor = get(), userInfoMapper = get())
     }
+
+    viewModel {
+        CreateAppointmentViewModel(
+            loggedInUserInteractor = get(),
+            tryCreateAppointmentInteractor = get(),
+            appointmentToUIAppointmentMapper = get()
+        )
+    }
 }
 
 private val presentationModule = module {
@@ -148,7 +161,7 @@ private val presentationModule = module {
 
     single { DomainRegistrationResultToUIMapper() }
 
-    single { DomainAppointmentToUIAppointmentMapper() }
+    single { DomainAppointmentToUIAppointmentMapper(dateMapper = get()) }
 
     single { DomainUserInfoToUIUserInfoMapper() }
 }

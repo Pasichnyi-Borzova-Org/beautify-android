@@ -1,13 +1,17 @@
 package com.opasichnyi.beautify.ui.fragment
 
+import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lenovo.smartoffice.common.util.extension.lifecycle.repeatOnStart
 import com.opasichnyi.beautify.R
 import com.opasichnyi.beautify.databinding.FragmentUserDetailsBinding
 import com.opasichnyi.beautify.domain.entity.UserAccount
+import com.opasichnyi.beautify.domain.entity.UserRole
 import com.opasichnyi.beautify.presentation.entity.UIUserInfo
 import com.opasichnyi.beautify.presentation.viewmodel.UserDetailsViewModel
 import com.opasichnyi.beautify.ui.base.BaseFragment
+import com.opasichnyi.beautify.util.ext.navigateActionSafe
 
 class UserDetailsFragment :
     BaseFragment<FragmentUserDetailsBinding, UserDetailsViewModel>() {
@@ -45,6 +49,21 @@ class UserDetailsFragment :
             ordersNum.text = userInfo.completedOrders
             ratingsNum.text = userInfo.averageRating
             expNum.text = userInfo.experience
+            if (userInfo.userAccount.role == UserRole.MASTER) {
+                makeAppointmentButton.visibility = View.VISIBLE
+                makeAppointmentButton.setOnClickListener {
+                    createAppointmentWithMaster()
+                }
+            }
         }
+    }
+
+    // TODO("Make an option for master to create appointment with client too")
+    private fun createAppointmentWithMaster() {
+        val action =
+            UserDetailsFragmentDirections.actionUserDetailsFragmentToCreateAppointmentFragment(
+                user
+            )
+        findNavController().navigateActionSafe(action)
     }
 }

@@ -26,4 +26,18 @@
     <string name="name_surname_format">%1$s %2$s</string>
 
     <string name="avatar_content_description">User avatar</string>
+    <string name="orders_label">orders</string>
+    <string name="using_app_label">using app</string>
+    <string name="ratings_laber">ratings</string>
+    <string name="title_hint">Title</string>
+    <string name="description_hint">Description</string>
+    <string name="price_hint">Price</string>
+    <string name="date_hint">Date</string>
+    <string name="time_from_hint">Time from</string>
+    <string name="time_to_hint">Time to</string>
+    <string name="master_field">Master: </string>
+    <string name="client_field">Client: </string>
+    <string name="change">Change</string>
+    <string name="make_appointment">Make an appointment</string>
+    <string name="create">Create</string>
 </resources>

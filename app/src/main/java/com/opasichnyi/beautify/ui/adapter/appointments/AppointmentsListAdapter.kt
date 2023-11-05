@@ -51,7 +51,7 @@ class AppointmentsListAdapter(
                     item.startTime,
                     item.endTime
                 )
-                partnerNameTv.text = item.partnerUsername
+                partnerNameTv.text = item.partnerUserName
                 priceTv.text = item.price
             }
         }

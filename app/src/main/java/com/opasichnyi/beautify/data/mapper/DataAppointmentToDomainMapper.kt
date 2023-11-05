@@ -4,6 +4,7 @@ import com.opasichnyi.beautify.data.entity.DataAppointment
 import com.opasichnyi.beautify.data.exception.MappingDataToDomainException
 import com.opasichnyi.beautify.domain.entity.Appointment
 import com.opasichnyi.beautify.domain.entity.UserRole
+import com.opasichnyi.beautify.domain.mapper.DateMapper
 
 class DataAppointmentToDomainMapper(
     private val dateMapper: DateMapper,
@@ -14,15 +15,15 @@ class DataAppointmentToDomainMapper(
         loggedInUsername: String,
     ): Appointment {
 
-        require(dataAppointment.clientUserName != dataAppointment.masterUserName)
+        require(dataAppointment.client != dataAppointment.master)
 
-        val (partnerUsername, currentUserRole) = when (loggedInUsername) {
-            dataAppointment.clientUserName -> {
-                Pair(dataAppointment.masterUserName, UserRole.CLIENT)
+        val currentUserRole = when (loggedInUsername) {
+            dataAppointment.client.login -> {
+                UserRole.CLIENT
             }
 
-            dataAppointment.masterUserName -> {
-                Pair(dataAppointment.clientUserName, UserRole.MASTER)
+            dataAppointment.master.login -> {
+                UserRole.MASTER
             }
 
             else -> {
@@ -33,12 +34,28 @@ class DataAppointmentToDomainMapper(
         return Appointment(
             id = dataAppointment.id,
             title = dataAppointment.title,
-            partnerUsername = partnerUsername,
+            master = dataAppointment.master,
+            client = dataAppointment.client,
             loggedInUserRole = currentUserRole,
             startTime = dateMapper.mapStringToDate(dataAppointment.startTime),
             endTime = dateMapper.mapStringToDate(dataAppointment.endTime),
             price = dataAppointment.price,
             description = dataAppointment.description,
+        )
+    }
+
+    fun mapDomainAppointmentToData(
+        appointment: Appointment,
+    ): DataAppointment {
+        return DataAppointment(
+            id = appointment.id,
+            title = appointment.title,
+            master = appointment.master,
+            client = appointment.client,
+            startTime = dateMapper.mapDateToString(appointment.startTime),
+            endTime = dateMapper.mapDateToString(appointment.endTime),
+            price = appointment.price,
+            description = appointment.description,
         )
     }
 }
