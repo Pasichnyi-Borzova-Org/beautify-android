@@ -10,6 +10,7 @@ import java.util.Calendar
 class AppointmentsRepositoryImpl(
     private val appointmentsDataSource: MockAppointmentsDataSource,
     private val loggedInUserDatasource: LoggedInUserDatasource,
+    private val appointmentMapper: DataAppointmentToDomainMapper,
 ) : AppointmentsRepository {
 
     override suspend fun getUpcomingAppointments(): List<Appointment> {
@@ -18,7 +19,7 @@ class AppointmentsRepositoryImpl(
             ?.let { appointmentsDataSource.getAppointmentsOfUser(it) }
             ?: throw NullPointerException("logged in user not found")
         return dataList.map {
-            DataAppointmentToDomainMapper().mapDataAppointmentToDomain(
+            appointmentMapper.mapDataAppointmentToDomain(
                 it,
                 loggedInUsername
             )

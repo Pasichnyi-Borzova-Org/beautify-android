@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.lenovo.smartoffice.common.util.extension.lifecycle.repeatOnStart
 import com.opasichnyi.beautify.databinding.FragmentUsersListBinding
 import com.opasichnyi.beautify.presentation.viewmodel.UsersListViewModel
 import com.opasichnyi.beautify.ui.adapter.users.UsersListAdapter
 import com.opasichnyi.beautify.ui.base.BaseFragment
+import com.opasichnyi.beautify.util.ext.navigateActionSafe
 
 class UsersListFragment : BaseFragment<FragmentUsersListBinding, UsersListViewModel>() {
 
@@ -40,7 +42,11 @@ class UsersListFragment : BaseFragment<FragmentUsersListBinding, UsersListViewMo
 
         repeatOnStart {
             viewModel.selectedUserFlow.collect { user ->
-                // TODO("Navigate to user details screen")
+                val action =
+                    UsersListFragmentDirections.actionUsersFragmentToUserDetailsFragment(
+                        user
+                    )
+                findNavController().navigateActionSafe(action)
             }
         }
     }

@@ -2,14 +2,17 @@ package com.opasichnyi.beautify.data.repository.impl
 
 import com.opasichnyi.beautify.data.datasource.LoggedInUserDatasource
 import com.opasichnyi.beautify.data.datasource.mock.MockAccountDataSource
+import com.opasichnyi.beautify.data.mapper.DataUserInfoToDomainMapper
 import com.opasichnyi.beautify.domain.entity.RegisterData
 import com.opasichnyi.beautify.domain.entity.RegisterResult
 import com.opasichnyi.beautify.domain.entity.UserAccount
+import com.opasichnyi.beautify.domain.entity.UserInfo
 import com.opasichnyi.beautify.domain.repository.UserRepository
 
 class UserRepositoryImpl(
     private val loggedInUserDatasource: LoggedInUserDatasource,
     private val accountDataSource: MockAccountDataSource,
+    private val userInfoMapper: DataUserInfoToDomainMapper,
 ) : UserRepository {
 
     override suspend fun getLoggedInUser(): UserAccount? {
@@ -39,7 +42,13 @@ class UserRepositoryImpl(
             }
         }
 
-    override suspend fun getAllUsers(): List<UserAccount> {
-        return accountDataSource.getAllUsers()
+    override suspend fun getAllUsers(): List<UserAccount> =
+        accountDataSource.getAllUsers()
+
+    override suspend fun getUserInfo(userAccount: UserAccount): UserInfo {
+        return userInfoMapper.mapDataUserInfoToDomain(
+            userInfo = accountDataSource.getUserInfo(userAccount.login),
+            userAccount = userAccount
+        )
     }
 }

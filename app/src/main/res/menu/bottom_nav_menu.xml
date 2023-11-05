@@ -7,7 +7,7 @@
         android:title="Events" />
 
     <item
-        android:id="@+id/searchFragment"
+        android:id="@+id/usersListFragment"
         android:icon="@drawable/baseline_search_24"
         android:title="Search" />
 </menu>

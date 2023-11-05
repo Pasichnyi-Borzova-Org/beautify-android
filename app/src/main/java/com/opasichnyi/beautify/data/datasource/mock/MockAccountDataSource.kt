@@ -7,6 +7,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.opasichnyi.beautify.data.entity.DataUserInfo
 import com.opasichnyi.beautify.data.exception.LoginFailedException
 import com.opasichnyi.beautify.domain.entity.RegisterData
 import com.opasichnyi.beautify.domain.entity.RegisterResult
@@ -74,6 +75,10 @@ class MockAccountDataSource(
             ?: accountsList
     }
 
+    fun getUserInfo(username: String): DataUserInfo {
+        return userInfoList.first { it.username == username }
+    }
+
     private fun saveUsers(list: List<UserAccount>) {
         val listString = gson.toJson(list)
         sharedPreferences.edit {
@@ -115,6 +120,29 @@ class MockAccountDataSource(
             userPasichnyi,
             userBorzova,
             userMaster,
+        )
+
+        private val infoPasichnyi = DataUserInfo(
+            username = "pasichnyi",
+            createdAccount = "2023-04-14T10:00:00Z",
+        )
+
+        private val infoBorzova = DataUserInfo(
+            username = "borzova",
+            createdAccount = "2022-05-14T10:00:00Z",
+        )
+
+        private val infoMaster = DataUserInfo(
+            username = "somemaster",
+            completedOrders = 340,
+            createdAccount = "2021-07-23T10:00:00Z",
+            averageRating = 4.6,
+        )
+
+        private val userInfoList = mutableListOf(
+            infoPasichnyi,
+            infoBorzova,
+            infoMaster,
         )
     }
 }
