@@ -25,8 +25,8 @@ class AppointmentsViewModel(
 
     private var appointments: List<Appointment> = emptyList()
 
-    fun loadAppointments() = scope.launch {
-        if (appointments.isNotEmpty()) {
+    fun loadAppointments(force: Boolean = false) = scope.launch {
+        if (appointments.isNotEmpty() && !force) {
             _appointmentsFlow.emit(
                 appointments.map(appointmentMapper::mapDomainAppointmentToUI)
             )
