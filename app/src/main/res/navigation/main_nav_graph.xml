@@ -43,6 +43,19 @@
         <argument
             android:name="user"
             app:argType="com.opasichnyi.beautify.domain.entity.UserAccount" />
+        <action
+            android:id="@+id/action_userDetailsFragment_to_createAppointmentFragment"
+            app:destination="@id/createAppointmentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createAppointmentFragment"
+        android:name="com.opasichnyi.beautify.ui.fragment.CreateAppointmentFragment"
+        android:label="create_appointment_fragment"
+        tools:layout="@layout/fragment_create_appointment">
+        <argument
+            android:name="selectedMaster"
+            app:argType="com.opasichnyi.beautify.domain.entity.UserAccount" />
     </fragment>
 
 </navigation>

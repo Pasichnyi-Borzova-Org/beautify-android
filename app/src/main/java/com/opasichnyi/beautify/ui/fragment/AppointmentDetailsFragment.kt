@@ -30,7 +30,7 @@ class AppointmentDetailsFragment :
                 binding.apply {
                     titleTv.text = appointment.title
                     descriptionTv.text = appointment.description
-                    userTv.text = appointment.partnerUsername
+                    userTv.text = appointment.partnerUserName
                     timeTv.text =
                         getString(
                             R.string.appointment_date_time_format,

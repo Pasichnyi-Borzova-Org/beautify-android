@@ -1,4 +1,4 @@
-package com.opasichnyi.beautify.data.mapper
+package com.opasichnyi.beautify.domain.mapper
 
 import java.text.SimpleDateFormat
 import java.util.Date

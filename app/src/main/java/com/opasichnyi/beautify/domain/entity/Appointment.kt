@@ -9,7 +9,8 @@ import java.util.Date
 data class Appointment(
     val id: Long,
     val title: String,
-    val partnerUsername: String,
+    val client: UserAccount,
+    val master: UserAccount,
     val loggedInUserRole: UserRole,
     val startTime: Date,
     val endTime: Date,

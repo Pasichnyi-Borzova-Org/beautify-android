@@ -3,6 +3,7 @@ package com.opasichnyi.beautify.data.mapper
 import com.opasichnyi.beautify.data.entity.DataUserInfo
 import com.opasichnyi.beautify.domain.entity.UserAccount
 import com.opasichnyi.beautify.domain.entity.UserInfo
+import com.opasichnyi.beautify.domain.mapper.DateMapper
 
 class DataUserInfoToDomainMapper(
     private val dateMapper: DateMapper,
