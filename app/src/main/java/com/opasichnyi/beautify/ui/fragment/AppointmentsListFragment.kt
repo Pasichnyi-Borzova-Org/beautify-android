@@ -1,7 +1,5 @@
 package com.opasichnyi.beautify.ui.fragment
 
-import android.content.Context
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +26,13 @@ class AppointmentsListFragment :
         adapter = AppointmentsListAdapter(viewModel::onAppointmentSelected, requireContext())
         binding?.appointmentsRecyclerView?.adapter = adapter
         return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.refreshBtn?.setOnClickListener {
+            viewModel.loadAppointments(true)
+        }
     }
 
     override fun listenViewModel(
