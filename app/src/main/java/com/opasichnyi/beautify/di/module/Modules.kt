@@ -13,6 +13,7 @@ import com.opasichnyi.beautify.domain.interactor.GetUserInfoInteractor
 import com.opasichnyi.beautify.domain.interactor.GetUsersInteractor
 import com.opasichnyi.beautify.domain.interactor.LoggedInUserInteractor
 import com.opasichnyi.beautify.domain.interactor.LoginInteractor
+import com.opasichnyi.beautify.domain.interactor.LogoutInteractor
 import com.opasichnyi.beautify.domain.interactor.RegistrationInteractor
 import com.opasichnyi.beautify.domain.interactor.TryCreateAppointmentInteractor
 import com.opasichnyi.beautify.domain.repository.AppointmentsRepository
@@ -94,6 +95,8 @@ private val domainModule = module {
     single { GetUserInfoInteractor(userRepository = get()) }
 
     single { TryCreateAppointmentInteractor(appointmentsRepository = get()) }
+
+    single { LogoutInteractor(userRepository = get()) }
 }
 
 private val viewModelModule = module {
@@ -105,7 +108,7 @@ private val viewModelModule = module {
     }
 
     viewModel {
-        HomeViewModel()
+        HomeViewModel(logoutInteractor = get())
     }
 
     viewModel {
