@@ -60,7 +60,7 @@ class CreateAppointmentFragment :
                     date = binding?.dateEditText?.text.toString(),
                     startTime = binding?.timeFromEditText?.text.toString(),
                     endTime = binding?.timeToEditText?.text.toString(),
-                    price = binding?.priceTextInput?.text.toString(),
+                    price = "20",
                     description = binding?.descriptionEditText?.text.toString(),
                 )
             )
