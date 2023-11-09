@@ -54,7 +54,7 @@ class DomainAppointmentToUIAppointmentMapper(
 
     companion object {
         const val DATE_FORMAT = "dd.MM.yyyy"
-        const val TIME_FORMAT = "hh:mm"
+        const val TIME_FORMAT = "HH:mm"
         const val DATE_TIME_FORMAT = "$DATE_FORMAT $TIME_FORMAT"
     }
 }

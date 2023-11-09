@@ -16,5 +16,5 @@ data class Appointment(
     val endTime: Date,
     // TODO("Add different currencies (BTF-12)")
     val price: Double,
-    val description: String,
+    val description: String?,
 ) : Parcelable

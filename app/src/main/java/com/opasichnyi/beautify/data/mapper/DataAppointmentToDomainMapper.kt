@@ -8,6 +8,7 @@ import com.opasichnyi.beautify.domain.mapper.DateMapper
 
 class DataAppointmentToDomainMapper(
     private val dateMapper: DateMapper,
+    private val userAccountMapper: DataUserAccountToDomainMapper,
 ) {
 
     fun mapDataAppointmentToDomain(
@@ -18,11 +19,11 @@ class DataAppointmentToDomainMapper(
         require(dataAppointment.client != dataAppointment.master)
 
         val currentUserRole = when (loggedInUsername) {
-            dataAppointment.client.login -> {
+            dataAppointment.client.username -> {
                 UserRole.CLIENT
             }
 
-            dataAppointment.master.login -> {
+            dataAppointment.master.username -> {
                 UserRole.MASTER
             }
 
@@ -34,8 +35,8 @@ class DataAppointmentToDomainMapper(
         return Appointment(
             id = dataAppointment.id,
             title = dataAppointment.title,
-            master = dataAppointment.master,
-            client = dataAppointment.client,
+            master = userAccountMapper.mapDataUserAccountToDomain(dataAppointment.master),
+            client = userAccountMapper.mapDataUserAccountToDomain(dataAppointment.client),
             loggedInUserRole = currentUserRole,
             startTime = dateMapper.mapStringToDate(dataAppointment.startTime),
             endTime = dateMapper.mapStringToDate(dataAppointment.endTime),
@@ -50,8 +51,8 @@ class DataAppointmentToDomainMapper(
         return DataAppointment(
             id = appointment.id,
             title = appointment.title,
-            master = appointment.master,
-            client = appointment.client,
+            master = userAccountMapper.mapDomainUserAccountToData(appointment.master),
+            client = userAccountMapper.mapDomainUserAccountToData(appointment.client),
             startTime = dateMapper.mapDateToString(appointment.startTime),
             endTime = dateMapper.mapDateToString(appointment.endTime),
             price = appointment.price,

@@ -7,7 +7,7 @@ class UIRegisterDataToDomainMapper {
 
     fun mapUIRegisterDataToDomain(uiRegisterData: UIRegisterData): RegisterData =
         RegisterData(
-            login = uiRegisterData.login,
+            username = uiRegisterData.login,
             name = uiRegisterData.name,
             surname = uiRegisterData.surname,
             password = uiRegisterData.password,
