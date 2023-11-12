@@ -17,7 +17,7 @@
     <string name="action_register">Register</string>
     <string name="empty_field_message">This field should not be empty</string>
     <string name="occupied_login_message">This login is already occupied</string>
-    <string name="password_short_message">Password should be longer than 7 digits</string>
+    <string name="password_short_message">Password should contain at least 8 digits including uppercase, lowercase, numbers and special characters</string>
     <string name="passwords_different_message">This password differs from original</string>
     <string name="i_am_a_master_text">I am a master</string>
     <string name="progress_message">Loading</string>

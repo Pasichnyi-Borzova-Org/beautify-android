@@ -6,5 +6,5 @@ sealed class RegisterResult {
         val user: UserAccount,
     ) : RegisterResult()
 
-    data object Error : RegisterResult()
+    data class Error(val reason: RegisterError) : RegisterResult()
 }

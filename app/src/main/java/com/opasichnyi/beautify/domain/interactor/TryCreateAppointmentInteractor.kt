@@ -8,7 +8,7 @@ class TryCreateAppointmentInteractor(
     private val appointmentsRepository: AppointmentsRepository,
 ) {
 
-    suspend operator fun invoke(appointment: Appointment) : AppointmentCreationResult{
+    suspend operator fun invoke(appointment: Appointment): AppointmentCreationResult {
         return appointmentsRepository.tryAddAppointment(appointment)
     }
 }

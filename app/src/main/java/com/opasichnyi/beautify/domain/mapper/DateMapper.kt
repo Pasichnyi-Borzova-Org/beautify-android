@@ -6,7 +6,7 @@ import java.util.Locale
 
 class DateMapper {
 
-    private val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
+    private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)
 
     fun mapStringToDate(dateTimeString: String): Date =
         sdf.parse(dateTimeString) as Date

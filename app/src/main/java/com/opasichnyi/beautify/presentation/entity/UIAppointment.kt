@@ -13,11 +13,11 @@ data class UIAppointment(
     val startTime: String,
     val endTime: String,
     val price: String,
-    val description: String,
+    val description: String?,
 ) {
     val partnerUserName = if (loggedInUserRole == UserRole.MASTER) {
-        client.login
+        client.username
     } else {
-        master.login
+        master.username
     }
 }

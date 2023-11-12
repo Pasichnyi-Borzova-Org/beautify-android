@@ -1,14 +1,15 @@
-package com.opasichnyi.beautify.domain.entity
+package com.opasichnyi.beautify.data.entity
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-// TODO("Refactor to Sealed Class with master and client")
 @Parcelize
-data class UserAccount(
+data class DataUserAccount(
     val username: String,
     val name: String,
     val surname: String?,
     val city: String?,
-    val role: UserRole,
+    @SerializedName("is_master")
+    val isMaster: Int,
 ) : Parcelable
