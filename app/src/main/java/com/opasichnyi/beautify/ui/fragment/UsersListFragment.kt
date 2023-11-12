@@ -28,9 +28,29 @@ class UsersListFragment : BaseFragment<FragmentUsersListBinding, UsersListViewMo
     override fun onResume() {
         super.onResume()
         viewModel.loadUsers()
+        val searchView =
+            binding?.searchView
+
+        searchView?.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                viewModel.filterUsers(newText)
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                viewModel.filterUsers(query)
+                return true
+            }
+
+        })
     }
 
-    override fun listenViewModel(viewModel: UsersListViewModel, binding: FragmentUsersListBinding) {
+    override fun listenViewModel(
+        viewModel: UsersListViewModel,
+        binding: FragmentUsersListBinding
+    ) {
         super.listenViewModel(viewModel, binding)
 
         repeatOnStart {
