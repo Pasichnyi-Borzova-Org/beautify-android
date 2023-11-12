@@ -22,11 +22,13 @@ class UsersListViewModel(
     val selectedUserFlow: SharedFlow<UserAccount> =
         _selectedUserFlow.asSharedFlow()
 
+    private var allUsers = emptyList<UserAccount>()
+
     fun loadUsers() = scope.launch {
         if (_usersFlow.value.isEmpty()) {
             showProgress()
-            val list = getUsersInteractor()
-            _usersFlow.emit(list)
+            allUsers = getUsersInteractor()
+            _usersFlow.emit(allUsers)
             hideProgress()
         } else {
             _usersFlow.emit(_usersFlow.value)
@@ -35,5 +37,12 @@ class UsersListViewModel(
 
     fun onUserSelected(user: UserAccount) = scope.launch {
         _selectedUserFlow.emit(user)
+    }
+
+    // TODO("Make search aoolicable for big amount of users and pagination - api calls + local")
+    fun filterUsers(query: String) = scope.launch {
+        _usersFlow.emit(allUsers.filter {
+            (it.name + " " + it.surname).contains(query)
+        })
     }
 }
