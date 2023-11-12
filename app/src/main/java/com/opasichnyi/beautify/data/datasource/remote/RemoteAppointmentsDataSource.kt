@@ -1,6 +1,5 @@
 package com.opasichnyi.beautify.data.datasource.remote
 
-import android.util.Log
 import com.google.gson.Gson
 import com.opasichnyi.beautify.data.datasource.remote.service.AppointmentService
 import com.opasichnyi.beautify.data.entity.DataAppointment
@@ -23,7 +22,11 @@ class RemoteAppointmentsDataSource(
     suspend fun tryCreateAppointment(appointment: DataAppointment): Boolean {
         val json = Gson().toJsonTree(appointment)
         val result = appointmentService.createAppointment(json = json)
-        Log.e("RemoteAppointmentsDataSource", result.toString())
+        return result.isSuccessful
+    }
+
+    suspend fun deleteAppointment(appointment: DataAppointment): Boolean {
+        val result = appointmentService.deleteAppointment(appointment.id)
         return result.isSuccessful
     }
 }

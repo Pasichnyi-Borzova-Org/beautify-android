@@ -13,7 +13,7 @@ class AppointmentsRepositoryImpl(
     private val loggedInUserDatasource: LoggedInUserDatasource,
     private val appointmentMapper: DataAppointmentToDomainMapper,
     private val appointmentsDataSource: RemoteAppointmentsDataSource,
-    ) : AppointmentsRepository {
+) : AppointmentsRepository {
 
     override suspend fun getUpcomingAppointments(): List<Appointment> {
         val loggedInUsername = loggedInUserDatasource.getLoggedInUser()
@@ -42,5 +42,13 @@ class AppointmentsRepositoryImpl(
         } else {
             AppointmentCreationResult.Error(ErrorReason.TIME_BUSY)
         }
+    }
+
+    override suspend fun deleteAppointment(appointment: Appointment) {
+        appointmentsDataSource.deleteAppointment(
+            appointmentMapper.mapDomainAppointmentToData(
+                appointment
+            )
+        )
     }
 }

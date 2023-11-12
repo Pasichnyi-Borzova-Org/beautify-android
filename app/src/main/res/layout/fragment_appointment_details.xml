@@ -74,4 +74,17 @@
         app:layout_constraintTop_toTopOf="@+id/descriptionIcon"
         tools:text="List of work:\n-nail polish\n-make a design with strawberries from the chat" />
 
+    <Button
+        android:id="@+id/deleteAppointmentButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/negative_red"
+        android:text="@string/delete_appointment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="12dp"/>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

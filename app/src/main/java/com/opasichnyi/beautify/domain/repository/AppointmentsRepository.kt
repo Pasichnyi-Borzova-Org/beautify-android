@@ -8,4 +8,6 @@ interface AppointmentsRepository {
     suspend fun getUpcomingAppointments(): List<Appointment>
 
     suspend fun tryAddAppointment(appointment: Appointment): AppointmentCreationResult
+
+    suspend fun deleteAppointment(appointment: Appointment)
 }
