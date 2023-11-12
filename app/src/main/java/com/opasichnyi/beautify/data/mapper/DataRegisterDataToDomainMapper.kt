@@ -10,6 +10,7 @@ class DataRegisterDataToDomainMapper {
         username = registerData.username,
         name = registerData.name,
         surname = registerData.surname,
+        city = registerData.city,
         password = registerData.password,
         role = if (registerData.isMaster == 0) UserRole.CLIENT else UserRole.MASTER
     )
@@ -18,6 +19,7 @@ class DataRegisterDataToDomainMapper {
         username = registerData.username,
         name = registerData.name,
         surname = registerData.surname,
+        city = registerData.city,
         password = registerData.password,
         isMaster = when (registerData.role) {
             UserRole.MASTER -> 1
