@@ -6,6 +6,7 @@ data class UIRegisterData(
     val login: String,
     val name: String,
     val surname: String,
+    val city: String?,
     val password: String,
     val passwordConfirm: String,
     val role: UserRole,

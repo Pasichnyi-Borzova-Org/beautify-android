@@ -13,6 +13,7 @@
     <string name="password_not_match">Passwords do not match</string>
     <string name="name_hint">First name</string>
     <string name="surname_hint">Second name</string>
+    <string name="city_hint">City</string>
     <string name="confirm_password_hint">Confirm password</string>
     <string name="action_register">Register</string>
     <string name="empty_field_message">This field should not be empty</string>

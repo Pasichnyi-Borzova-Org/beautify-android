@@ -70,6 +70,22 @@
         app:layout_constraintTop_toBottomOf="@+id/nameEt" />
 
     <EditText
+        android:id="@+id/cityEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:hint="@string/city_hint"
+        android:imeActionLabel="@string/action_log_in"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/surnameEt" />
+
+    <EditText
         android:id="@+id/passwordEt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -83,7 +99,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/surnameEt" />
+        app:layout_constraintTop_toBottomOf="@+id/cityEditText" />
 
     <EditText
         android:id="@+id/passwordConfirmEt"

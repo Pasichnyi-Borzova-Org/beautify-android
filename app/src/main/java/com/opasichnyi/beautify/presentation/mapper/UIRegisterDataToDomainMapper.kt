@@ -10,6 +10,7 @@ class UIRegisterDataToDomainMapper {
             username = uiRegisterData.login,
             name = uiRegisterData.name,
             surname = uiRegisterData.surname,
+            city = uiRegisterData.city,
             password = uiRegisterData.password,
             role = uiRegisterData.role,
         )

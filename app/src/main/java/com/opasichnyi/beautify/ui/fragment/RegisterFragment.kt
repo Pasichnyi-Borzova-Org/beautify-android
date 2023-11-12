@@ -24,6 +24,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
                     login = binding?.loginEt?.text.toString(),
                     name = binding?.nameEt?.text.toString(),
                     surname = binding?.surnameEt?.text.toString(),
+                    city = binding?.cityEditText?.text.toString().ifEmpty { null },
                     password = binding?.passwordEt?.text.toString(),
                     passwordConfirm = binding?.passwordConfirmEt?.text.toString(),
                     role = if (binding?.isMasterCheckbox?.isChecked == true)
