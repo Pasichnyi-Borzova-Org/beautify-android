@@ -18,6 +18,9 @@ class AppointmentDetailsFragment :
     override fun onResume() {
         super.onResume()
         viewModel.onAppointmentLoaded(appointment)
+        binding?.deleteAppointmentButton?.setOnClickListener {
+            viewModel.deleteAppointment(appointment)
+        }
     }
 
     override fun listenViewModel(
