@@ -45,7 +45,45 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.security.SecureRandom
+import java.security.cert.X509Certificate
+import javax.net.ssl.SSLContext
+import javax.net.ssl.SSLSocketFactory
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
+import javax.security.cert.CertificateException
 
+
+fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
+    return try {
+        val trustAllCerts = arrayOf<TrustManager>(
+            object : X509TrustManager {
+                @Throws(CertificateException::class)
+                override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
+                }
+
+                @Throws(CertificateException::class)
+                override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
+                }
+
+                override fun getAcceptedIssuers(): Array<X509Certificate> {
+                    return arrayOf()
+                }
+            }
+        )
+
+        val sslContext = SSLContext.getInstance("SSL")
+        sslContext.init(null, trustAllCerts, SecureRandom())
+
+        val sslSocketFactory: SSLSocketFactory = sslContext.socketFactory
+        val builder = OkHttpClient.Builder()
+        builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
+        builder.hostnameVerifier { _, _ -> true }
+        builder
+    } catch (e: Exception) {
+        throw RuntimeException(e)
+    }
+}
 
 private val dataModule = module {
 
@@ -90,10 +128,10 @@ private val dataModule = module {
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
-        val client: OkHttpClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
+        val client: OkHttpClient = getUnsafeOkHttpClient().addInterceptor(interceptor).build()
 
         Retrofit.Builder()
-            .baseUrl("http://192.168.1.65:5000/")
+            .baseUrl("https://192.168.1.65:5000/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

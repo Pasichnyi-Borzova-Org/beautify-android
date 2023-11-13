@@ -56,6 +56,11 @@
         <argument
             android:name="selectedMaster"
             app:argType="com.opasichnyi.beautify.domain.entity.UserAccount" />
+        <action
+            android:id="@+id/action_createAppointmentFragment_to_appointmentDetailsFragment"
+            app:popUpTo="@id/userDetailsFragment"
+            app:popUpToInclusive="false"
+            app:destination="@id/appointmentDetailsFragment" />
     </fragment>
 
 </navigation>

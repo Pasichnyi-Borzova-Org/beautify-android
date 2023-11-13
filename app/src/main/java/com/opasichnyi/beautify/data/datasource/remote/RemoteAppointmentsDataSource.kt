@@ -1,5 +1,6 @@
 package com.opasichnyi.beautify.data.datasource.remote
 
+import android.util.Log
 import com.google.gson.Gson
 import com.opasichnyi.beautify.data.datasource.remote.service.AppointmentService
 import com.opasichnyi.beautify.data.entity.DataAppointment

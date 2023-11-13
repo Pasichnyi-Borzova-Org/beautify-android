@@ -1,15 +1,18 @@
 package com.opasichnyi.beautify.ui.fragment
 
 import android.text.InputFilter
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lenovo.smartoffice.common.util.extension.lifecycle.repeatOnStart
 import com.opasichnyi.beautify.R
 import com.opasichnyi.beautify.databinding.FragmentCreateAppointmentBinding
+import com.opasichnyi.beautify.domain.entity.Appointment
 import com.opasichnyi.beautify.domain.entity.UserAccount
 import com.opasichnyi.beautify.presentation.entity.UIAppointment
 import com.opasichnyi.beautify.presentation.filters.DecimalDigitsInputFilter
 import com.opasichnyi.beautify.presentation.viewmodel.CreateAppointmentViewModel
 import com.opasichnyi.beautify.ui.base.BaseFragment
+import com.opasichnyi.beautify.util.ext.navigateActionSafe
 
 class CreateAppointmentFragment :
     BaseFragment<FragmentCreateAppointmentBinding, CreateAppointmentViewModel>() {
@@ -44,6 +47,12 @@ class CreateAppointmentFragment :
                 binding.masterText.text = getFullNameFromUserAccount(it)
             }
         }
+
+        viewLifecycleOwner.repeatOnStart {
+            viewModel.createdAppointmentResultFlow.collect {
+                showAppointmentDetailsPage(it)
+            }
+        }
     }
 
     private fun initView() {
@@ -73,5 +82,13 @@ class CreateAppointmentFragment :
             account.name,
             account.surname,
         )
+    }
+
+    private fun showAppointmentDetailsPage(appointment: Appointment) {
+        val action =
+            CreateAppointmentFragmentDirections.actionCreateAppointmentFragmentToAppointmentDetailsFragment(
+                appointment
+            )
+        findNavController().navigateActionSafe(action)
     }
 }
