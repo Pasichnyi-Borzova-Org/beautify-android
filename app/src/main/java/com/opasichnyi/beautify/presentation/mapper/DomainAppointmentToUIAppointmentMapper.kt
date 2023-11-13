@@ -33,9 +33,14 @@ class DomainAppointmentToUIAppointmentMapper(
         )
     }
 
+    // TODO("Replace throwing exception with results entities and handling them on UI")
     fun mapUIAppointmentToDomain(appointment: UIAppointment): Appointment {
-        val date = dateFormat.parse(appointment.date)
-            ?: throw DateMappingException("Date has wrong format")
+        try {
+            dateFormat.parse(appointment.date)
+                ?: throw DateMappingException("Date has wrong format")
+        } catch (ex: Exception) {
+            throw TimeMappingException("Date has wrong format")
+        }
         return Appointment(
             id = appointment.id,
             title = appointment.title,
@@ -43,10 +48,18 @@ class DomainAppointmentToUIAppointmentMapper(
             client = appointment.client,
             loggedInUserRole = appointment.loggedInUserRole,
             // TODO("Change exceptions")
-            startTime = dateTimeFormat.parse(appointment.date + " " + appointment.startTime)
-                ?: throw TimeMappingException("From time has wrong format"),
-            endTime = dateTimeFormat.parse(appointment.date + " " + appointment.endTime)
-                ?: throw TimeMappingException("To time has wrong format"),
+            startTime = try {
+                dateTimeFormat.parse(appointment.date + " " + appointment.startTime)
+                    ?: throw TimeMappingException("'From' time has wrong format")
+            } catch (ex: Exception) {
+                throw TimeMappingException("'From' time has wrong format")
+            },
+            endTime = try {
+                dateTimeFormat.parse(appointment.date + " " + appointment.endTime)
+                    ?: throw TimeMappingException("To time has wrong format")
+            } catch (ex: Exception) {
+                throw TimeMappingException("To time has wrong format")
+            },
             price = appointment.price.removeSuffix("$").toDouble(),
             description = appointment.description,
         )

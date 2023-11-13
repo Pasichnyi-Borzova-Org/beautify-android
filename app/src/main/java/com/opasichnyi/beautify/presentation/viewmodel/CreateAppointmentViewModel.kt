@@ -60,10 +60,11 @@ class CreateAppointmentViewModel(
         }
 
     private fun onAppointmentCreationSuccess(result: AppointmentCreationResult.Success) = scope.launch{
-        showError("Success")
         _createdAppointmentResultFlow.emit(result.appointment)
     }
 
+    // TODO("Emit result and fully process on fragment")
+    // TODO("BTF-34 process all possible backend errors")
     private fun onAppointmentCreationError(result: AppointmentCreationResult.Error) {
         showError(
             when (result.reason) {
