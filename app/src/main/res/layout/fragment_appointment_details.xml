@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:textSize="20sp"
+        android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="My custom title" />
@@ -32,6 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:gravity="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/timeIcon"
         app:layout_constraintStart_toEndOf="@+id/timeIcon"
         app:layout_constraintTop_toTopOf="@+id/timeIcon"
         tools:text="23.09.2023 -- 15:00-16:00" />
@@ -51,6 +53,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/userIcon"
         app:layout_constraintStart_toEndOf="@+id/userIcon"
         app:layout_constraintTop_toTopOf="@+id/userIcon"
         tools:text="Ludmila Ulianova" />
@@ -70,6 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/descriptionIcon"
         app:layout_constraintTop_toTopOf="@+id/descriptionIcon"
         tools:text="List of work:\n-nail polish\n-make a design with strawberries from the chat" />
@@ -78,13 +83,12 @@
         android:id="@+id/deleteAppointmentButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="12dp"
         android:backgroundTint="@color/negative_red"
         android:text="@string/delete_appointment"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="12dp"/>
-
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

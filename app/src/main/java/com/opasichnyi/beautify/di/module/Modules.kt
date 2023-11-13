@@ -1,5 +1,6 @@
 package com.opasichnyi.beautify.di.module
 
+import com.google.gson.GsonBuilder
 import com.opasichnyi.beautify.data.datasource.LoggedInUserDatasource
 import com.opasichnyi.beautify.data.datasource.remote.RemoteAccountDataSource
 import com.opasichnyi.beautify.data.datasource.remote.RemoteAppointmentsDataSource
@@ -133,10 +134,14 @@ private val dataModule = module {
 
         val client: OkHttpClient = getUnsafeOkHttpClient().addInterceptor(interceptor).build()
 
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
+
         Retrofit.Builder()
             .baseUrl("https://192.168.1.65:5000/")
             .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 

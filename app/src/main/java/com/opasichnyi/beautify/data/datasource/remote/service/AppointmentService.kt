@@ -18,5 +18,5 @@ interface AppointmentService {
     suspend fun createAppointment(@Body json: JsonElement): Response<DataAppointment>
 
     @DELETE("appointments/delete/{id}")
-    suspend fun deleteAppointment(@Path("id") id: Long): Response<Boolean>
+    suspend fun deleteAppointment(@Path("id") id: Long): Response<String>
 }

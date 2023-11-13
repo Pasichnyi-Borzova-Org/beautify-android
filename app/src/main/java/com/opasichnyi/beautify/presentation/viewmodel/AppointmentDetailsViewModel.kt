@@ -19,6 +19,10 @@ class AppointmentDetailsViewModel(
     val selectedAppointmentFlow: SharedFlow<UIAppointment> =
         _selectedAppointmentFlow.asSharedFlow()
 
+    private val _deletedAppointmentFlow = MutableSharedFlow<Appointment>()
+    val deletedAppointmentFlow: SharedFlow<Appointment> =
+        _deletedAppointmentFlow.asSharedFlow()
+
     fun onAppointmentLoaded(appointment: Appointment) = scope.launch {
         _selectedAppointmentFlow.emit(
             appointmentMapper.mapDomainAppointmentToUI(appointment)
@@ -27,5 +31,6 @@ class AppointmentDetailsViewModel(
 
     fun deleteAppointment(appointment: Appointment) = scope.launch {
         deleteAppointmentInteractor(appointment)
+        _deletedAppointmentFlow.emit(appointment)
     }
 }
