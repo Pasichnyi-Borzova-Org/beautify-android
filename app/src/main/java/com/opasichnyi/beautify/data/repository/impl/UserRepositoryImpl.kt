@@ -58,6 +58,11 @@ class UserRepositoryImpl(
             }
         }
 
+    // TODO("Replace let with nul check")
+    override suspend fun deleteCurrentUser() {
+        loggedInUserDatasource.getLoggedInUser()?.let { accountDataSource.deleteUser(it) }
+    }
+
     override suspend fun getAllUsers(): List<UserAccount> =
         accountDataSource.getAllUsers().map { userAccountMapper.mapDataUserAccountToDomain(it) }
 

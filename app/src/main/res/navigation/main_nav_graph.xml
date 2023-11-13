@@ -63,4 +63,11 @@
             app:destination="@id/appointmentDetailsFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.opasichnyi.beautify.ui.fragment.SettingsFragment"
+        android:label="settings_fragment"
+        tools:layout="@layout/fragment_settings">
+    </fragment>
+
 </navigation>

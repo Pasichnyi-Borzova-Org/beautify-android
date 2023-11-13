@@ -15,6 +15,8 @@ interface UserRepository {
 
     suspend fun registerUser(registerData: RegisterData): RegisterResult
 
+    suspend fun deleteCurrentUser()
+
     suspend fun getAllUsers(): List<UserAccount>
 
     suspend fun getUserInfo(userAccount: UserAccount): UserInfo
