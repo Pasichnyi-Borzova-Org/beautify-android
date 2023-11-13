@@ -3,13 +3,11 @@ package com.opasichnyi.beautify.ui.base
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.View
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 import com.lenovo.smartoffice.common.util.extension.lifecycle.repeatOnStart
 import com.opasichnyi.beautify.R
 import com.opasichnyi.beautify.presentation.base.BaseViewModel
@@ -17,6 +15,7 @@ import com.opasichnyi.beautify.ui.ext.inflateBinding
 import com.opasichnyi.beautify.util.ext.getGenericClass
 import com.opasichnyi.beautify.util.ext.unsafeLazy
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+
 
 open class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatActivity(),
     BaseView<VB, VM> {
@@ -63,11 +62,19 @@ open class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatActivit
     }
 
     open fun showError(errorMessage: String) {
-        Snackbar.make(
-            findViewById<View>(android.R.id.content).rootView,
-            errorMessage,
-            Snackbar.LENGTH_LONG
-        ).show()
+//        Snackbar.make(
+//            findViewById<View>(android.R.id.content).rootView,
+//            errorMessage,
+//            Snackbar.LENGTH_LONG
+//        ).show()
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.error_title))
+            .setMessage(errorMessage)
+            .setPositiveButton(
+                android.R.string.ok
+            ) { _, _ -> viewModel.hideError() }
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .show()
     }
 
     open fun showProgress() {
