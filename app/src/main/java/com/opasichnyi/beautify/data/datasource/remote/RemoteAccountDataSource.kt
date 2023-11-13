@@ -63,4 +63,8 @@ class RemoteAccountDataSource(
         val response = accountService.registerUser(json)
         return response.body()!!
     }
+
+    suspend fun deleteUser(username: String) {
+        accountService.deleteUser(username)
+    }
 }

@@ -20,7 +20,7 @@ class LoggedInUserDatasource(
 
         sharedPreferences = EncryptedSharedPreferences.create(
             context,
-            "secret_shared_prefs",
+            "login_shared_prefs",
             masterKey,
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM

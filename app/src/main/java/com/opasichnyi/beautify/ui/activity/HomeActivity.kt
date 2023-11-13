@@ -27,37 +27,37 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
             (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
 
         binding.bottomNavigation.setupWithNavController(navController)
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        // R.menu.mymenu is a reference to an xml file named mymenu.xml which should be inside your res/menu directory.
-        // If you don't have res/menu, just create a directory named "menu" inside res
         menuInflater.inflate(R.menu.main_actions_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
-    // handle button activities
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-        if (id == R.id.logout) {
-            viewModel.logout()
-
+        if (id == R.id.settings) {
+            openSettingsScreen()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    override fun listenViewModel(viewModel: HomeViewModel, binding: ActivityHomeBinding) {
-        super.listenViewModel(viewModel, binding)
+    override fun onBackPressed() {
+        super.onBackPressed()
 
-        repeatOnStart {
-            viewModel.logoutResultFlow.collect {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-                finish()
-                Runtime.getRuntime().exit(0)
-            }
-        }
+        val navController =
+            (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
+
+        navController.navigateUp()
+    }
+
+    private fun openSettingsScreen() {
+        val navController =
+            (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
+
+        navController.navigate(R.id.settingsFragment)
     }
 
     companion object {

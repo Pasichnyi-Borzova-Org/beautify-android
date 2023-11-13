@@ -7,6 +7,7 @@ import com.opasichnyi.beautify.data.entity.DataUserInfo
 import com.opasichnyi.beautify.domain.entity.RegisterError
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -27,4 +28,8 @@ interface AccountService {
 
     @POST("users")
     suspend fun registerUser(@Body json: JsonElement): Response<ApiCallResult<DataUserAccount, RegisterError>>
+
+    // TODO("Not secure, use token or other mechanisms")
+    @DELETE("users/delete/{username}")
+    suspend fun deleteUser(@Path("username") username: String): Response<Boolean>
 }

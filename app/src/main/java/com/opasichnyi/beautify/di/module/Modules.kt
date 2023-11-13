@@ -13,6 +13,7 @@ import com.opasichnyi.beautify.data.mapper.RegisterResultMapper
 import com.opasichnyi.beautify.data.repository.impl.AppointmentsRepositoryImpl
 import com.opasichnyi.beautify.data.repository.impl.UserRepositoryImpl
 import com.opasichnyi.beautify.domain.interactor.DeleteAppointmentInteractor
+import com.opasichnyi.beautify.domain.interactor.DeleteCurrentAccountInteractor
 import com.opasichnyi.beautify.domain.interactor.GetUpcomingAppointmentsInteractor
 import com.opasichnyi.beautify.domain.interactor.GetUserInfoInteractor
 import com.opasichnyi.beautify.domain.interactor.GetUsersInteractor
@@ -36,6 +37,7 @@ import com.opasichnyi.beautify.presentation.viewmodel.LoginActivityViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.LoginViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.MainActivityViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.RegisterViewModel
+import com.opasichnyi.beautify.presentation.viewmodel.SettingsViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.UserDetailsViewModel
 import com.opasichnyi.beautify.presentation.viewmodel.UsersListViewModel
 import okhttp3.OkHttpClient
@@ -54,6 +56,7 @@ import javax.net.ssl.X509TrustManager
 import javax.security.cert.CertificateException
 
 
+// TODO("Refactor")
 fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
     return try {
         val trustAllCerts = arrayOf<TrustManager>(
@@ -173,6 +176,8 @@ private val domainModule = module {
     single { LogoutInteractor(userRepository = get()) }
 
     single { DeleteAppointmentInteractor(appointmentsRepository = get()) }
+
+    single { DeleteCurrentAccountInteractor(userRepository = get()) }
 }
 
 private val viewModelModule = module {
@@ -184,7 +189,7 @@ private val viewModelModule = module {
     }
 
     viewModel {
-        HomeViewModel(logoutInteractor = get())
+        HomeViewModel()
     }
 
     viewModel {
@@ -233,6 +238,10 @@ private val viewModelModule = module {
             tryCreateAppointmentInteractor = get(),
             appointmentToUIAppointmentMapper = get()
         )
+    }
+
+    viewModel {
+        SettingsViewModel(logoutInteractor = get(), deleteCurrentAccountInteractor = get())
     }
 }
 
