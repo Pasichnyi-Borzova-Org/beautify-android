@@ -1,5 +1,6 @@
 package com.opasichnyi.beautify.presentation.viewmodel
 
+import com.opasichnyi.beautify.domain.entity.Appointment
 import com.opasichnyi.beautify.domain.entity.AppointmentCreationResult
 import com.opasichnyi.beautify.domain.entity.ErrorReason
 import com.opasichnyi.beautify.domain.entity.UserAccount
@@ -26,6 +27,10 @@ class CreateAppointmentViewModel(
     private val _clientFlow = MutableSharedFlow<UserAccount>()
     val clientFlow: SharedFlow<UserAccount> =
         _clientFlow.asSharedFlow()
+
+    private val _createdAppointmentResultFlow = MutableSharedFlow<Appointment>()
+    val createdAppointmentResultFlow: SharedFlow<Appointment> =
+        _createdAppointmentResultFlow.asSharedFlow()
 
     fun onScreenOpened(masterUserAccount: UserAccount) = scope.launch {
         showProgress()
@@ -54,8 +59,9 @@ class CreateAppointmentViewModel(
             }
         }
 
-    private fun onAppointmentCreationSuccess(result: AppointmentCreationResult.Success) {
+    private fun onAppointmentCreationSuccess(result: AppointmentCreationResult.Success) = scope.launch{
         showError("Success")
+        _createdAppointmentResultFlow.emit(result.appointment)
     }
 
     private fun onAppointmentCreationError(result: AppointmentCreationResult.Error) {

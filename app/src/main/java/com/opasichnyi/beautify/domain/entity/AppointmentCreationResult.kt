@@ -1,5 +1,6 @@
 package com.opasichnyi.beautify.domain.entity
 
+// TODO("Make generic class like in data layer")
 sealed class AppointmentCreationResult {
 
     data class Success(

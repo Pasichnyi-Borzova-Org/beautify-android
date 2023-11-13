@@ -1,5 +1,6 @@
 package com.opasichnyi.beautify.data.repository.impl
 
+import android.util.Log
 import com.opasichnyi.beautify.data.datasource.LoggedInUserDatasource
 import com.opasichnyi.beautify.data.datasource.remote.RemoteAppointmentsDataSource
 import com.opasichnyi.beautify.data.mapper.DataAppointmentToDomainMapper
@@ -38,8 +39,10 @@ class AppointmentsRepositoryImpl(
                 )
             )
         ) {
+            Log.e("Repository","success creating")
             AppointmentCreationResult.Success(appointment)
         } else {
+            Log.e("Repository","error creating")
             AppointmentCreationResult.Error(ErrorReason.TIME_BUSY)
         }
     }
