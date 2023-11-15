@@ -30,8 +30,9 @@ class AppointmentsListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.refreshBtn?.setOnClickListener {
+        binding?.swipeRefreshLayout?.setOnRefreshListener {
             viewModel.loadAppointments(true)
+            binding?.swipeRefreshLayout?.isRefreshing = false
         }
     }
 

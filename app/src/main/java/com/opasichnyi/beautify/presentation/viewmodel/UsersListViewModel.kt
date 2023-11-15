@@ -24,8 +24,8 @@ class UsersListViewModel(
 
     private var allUsers = emptyList<UserAccount>()
 
-    fun loadUsers() = scope.launch {
-        if (_usersFlow.value.isEmpty()) {
+    fun loadUsers(force: Boolean = false) = scope.launch {
+        if (_usersFlow.value.isEmpty() || force) {
             showProgress()
             allUsers = getUsersInteractor()
             _usersFlow.emit(allUsers)

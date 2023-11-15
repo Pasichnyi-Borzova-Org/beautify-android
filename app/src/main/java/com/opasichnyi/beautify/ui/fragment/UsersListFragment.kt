@@ -25,6 +25,14 @@ class UsersListFragment : BaseFragment<FragmentUsersListBinding, UsersListViewMo
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.swipeRefreshLayout?.setOnRefreshListener {
+            viewModel.loadUsers(true)
+            binding?.swipeRefreshLayout?.isRefreshing = false
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         viewModel.loadUsers()

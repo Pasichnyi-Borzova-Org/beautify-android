@@ -6,8 +6,11 @@ import com.opasichnyi.beautify.presentation.base.BaseViewModel
 import com.opasichnyi.beautify.presentation.entity.UIAppointment
 import com.opasichnyi.beautify.presentation.mapper.DomainAppointmentToUIAppointmentMapper
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class AppointmentsViewModel(
@@ -15,27 +18,25 @@ class AppointmentsViewModel(
     private val appointmentMapper: DomainAppointmentToUIAppointmentMapper,
 ) : BaseViewModel() {
 
-    private val _appointmentsFlow = MutableSharedFlow<List<UIAppointment>>()
-    val appointmentsFlow: SharedFlow<List<UIAppointment>> =
-        _appointmentsFlow.asSharedFlow()
+    private val _appointmentsFlow = MutableStateFlow<List<UIAppointment>>(emptyList())
+    val appointmentsFlow: StateFlow<List<UIAppointment>> =
+        _appointmentsFlow.asStateFlow()
 
     private val _selectedAppointmentFlow = MutableSharedFlow<Appointment>()
     val selectedAppointmentFlow: SharedFlow<Appointment> =
         _selectedAppointmentFlow.asSharedFlow()
 
-    private var appointments: List<Appointment> = emptyList()
-
+    // TODO("Try to remove force flag and always refresh appointemtns from API?
+    //  Retest and decide")
     fun loadAppointments(force: Boolean = false) = scope.launch {
-        if (appointments.isNotEmpty() && !force) {
+        if (_appointmentsFlow.value.isNotEmpty() && !force) {
             _appointmentsFlow.emit(
-                appointments.map(appointmentMapper::mapDomainAppointmentToUI)
+                _appointmentsFlow.value
             )
         } else {
             showProgress()
-
             _appointmentsFlow.emit(
                 getUpcomingAppointmentsInteractor()
-                    .also { appointments = it }
                     .map(
                         appointmentMapper::mapDomainAppointmentToUI
                     )
@@ -49,7 +50,7 @@ class AppointmentsViewModel(
     fun onAppointmentSelected(appointment: UIAppointment) = scope.launch {
         _selectedAppointmentFlow
             .emit(
-                appointments.first { it.id == appointment.id }
+                appointmentMapper.mapUIAppointmentToDomain(appointment)
             )
     }
 }
