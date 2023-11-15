@@ -79,6 +79,47 @@
         app:layout_constraintTop_toTopOf="@+id/descriptionIcon"
         tools:text="List of work:\n-nail polish\n-make a design with strawberries from the chat" />
 
+
+    <Button
+        android:id="@+id/completeAppointmentButton"
+        style="@style/Wide"
+        android:layout_margin="12dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/positive_green"
+        android:text="@string/complete_appointment"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/editAppointmentButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/editAppointmentButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:backgroundTint="@color/color_primary"
+        android:text="@string/edit_appointment"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/deleteAppointmentButton"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/appointmentCompletedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="@string/appointment_completed"
+        android:textColor="@color/positive_green"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/editAppointmentButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
+
     <Button
         android:id="@+id/deleteAppointmentButton"
         android:layout_width="0dp"
@@ -86,6 +127,20 @@
         android:layout_margin="12dp"
         android:backgroundTint="@color/negative_red"
         android:text="@string/delete_appointment"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/editAppointmentButton"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/rateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:backgroundTint="@color/color_primary"
+        android:text="@string/rate_appointment"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

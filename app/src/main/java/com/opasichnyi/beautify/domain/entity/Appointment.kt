@@ -16,5 +16,10 @@ data class Appointment(
     val endTime: Date,
     // TODO("Add different currencies (BTF-12)")
     val price: Double,
+    val status: AppointmentStatus,
     val description: String?,
 ) : Parcelable
+
+enum class AppointmentStatus {
+    CANNOT_COMPLETE, CAN_COMPLETE, COMPLETED
+}

@@ -1,5 +1,6 @@
 package com.opasichnyi.beautify.presentation.entity
 
+import com.opasichnyi.beautify.domain.entity.AppointmentStatus
 import com.opasichnyi.beautify.domain.entity.UserAccount
 import com.opasichnyi.beautify.domain.entity.UserRole
 
@@ -13,6 +14,7 @@ data class UIAppointment(
     val startTime: String,
     val endTime: String,
     val price: String,
+    val status: AppointmentStatus,
     val description: String?,
 ) {
     val partnerUserName = if (loggedInUserRole == UserRole.MASTER) {

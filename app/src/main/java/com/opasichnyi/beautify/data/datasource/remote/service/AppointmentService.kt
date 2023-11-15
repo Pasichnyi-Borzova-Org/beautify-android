@@ -19,4 +19,8 @@ interface AppointmentService {
 
     @DELETE("appointments/delete/{id}")
     suspend fun deleteAppointment(@Path("id") id: Long): Response<String>
+
+    // TODO("Check session to allow only master to complete appointment")
+    @POST("appointments/complete/{id}")
+    suspend fun completeAppointment(@Path("id") id: Long): Response<DataAppointment>
 }

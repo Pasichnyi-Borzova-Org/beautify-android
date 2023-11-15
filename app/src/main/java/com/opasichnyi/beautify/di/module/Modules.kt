@@ -13,6 +13,7 @@ import com.opasichnyi.beautify.data.mapper.DataUserInfoToDomainMapper
 import com.opasichnyi.beautify.data.mapper.RegisterResultMapper
 import com.opasichnyi.beautify.data.repository.impl.AppointmentsRepositoryImpl
 import com.opasichnyi.beautify.data.repository.impl.UserRepositoryImpl
+import com.opasichnyi.beautify.domain.interactor.CompleteAppointmentInteractor
 import com.opasichnyi.beautify.domain.interactor.DeleteAppointmentInteractor
 import com.opasichnyi.beautify.domain.interactor.DeleteCurrentAccountInteractor
 import com.opasichnyi.beautify.domain.interactor.GetUpcomingAppointmentsInteractor
@@ -183,6 +184,8 @@ private val domainModule = module {
     single { DeleteAppointmentInteractor(appointmentsRepository = get()) }
 
     single { DeleteCurrentAccountInteractor(userRepository = get()) }
+
+    single { CompleteAppointmentInteractor(appointmentsRepository = get()) }
 }
 
 private val viewModelModule = module {
@@ -225,7 +228,8 @@ private val viewModelModule = module {
     viewModel {
         AppointmentDetailsViewModel(
             appointmentMapper = get(),
-            deleteAppointmentInteractor = get()
+            deleteAppointmentInteractor = get(),
+            completeAppointmentInteractor = get(),
         )
     }
 

@@ -1,6 +1,5 @@
 package com.opasichnyi.beautify.data.repository.impl
 
-import android.util.Log
 import com.opasichnyi.beautify.data.datasource.LoggedInUserDatasource
 import com.opasichnyi.beautify.data.datasource.remote.RemoteAppointmentsDataSource
 import com.opasichnyi.beautify.data.mapper.DataAppointmentToDomainMapper
@@ -8,7 +7,6 @@ import com.opasichnyi.beautify.domain.entity.Appointment
 import com.opasichnyi.beautify.domain.entity.AppointmentCreationResult
 import com.opasichnyi.beautify.domain.entity.ErrorReason
 import com.opasichnyi.beautify.domain.repository.AppointmentsRepository
-import java.util.Calendar
 
 class AppointmentsRepositoryImpl(
     private val loggedInUserDatasource: LoggedInUserDatasource,
@@ -26,23 +24,24 @@ class AppointmentsRepositoryImpl(
                 it,
                 loggedInUsername
             )
-        }.filter {
-            // TODO("Make upcoming filtering on BE")
-            it.startTime > Calendar.getInstance().time
         }.sortedBy { it.startTime }
     }
 
     override suspend fun tryAddAppointment(appointment: Appointment): AppointmentCreationResult {
-        return if (appointmentsDataSource.tryCreateAppointment(
-                appointmentMapper.mapDomainAppointmentToData(
-                    appointment
+
+        return try {
+            AppointmentCreationResult.Success(
+                appointmentMapper.mapDataAppointmentToDomain(
+                    appointmentsDataSource.tryCreateAppointment(
+                        appointmentMapper.mapDomainAppointmentToData(
+                            appointment,
+
+                            )
+                    ),
+                    loggedInUserDatasource.getLoggedInUser() ?: throw Exception("Error")
                 )
             )
-        ) {
-            Log.e("Repository","success creating")
-            AppointmentCreationResult.Success(appointment)
-        } else {
-            Log.e("Repository","error creating")
+        } catch (ex: Exception) {
             AppointmentCreationResult.Error(ErrorReason.TIME_BUSY)
         }
     }
@@ -53,5 +52,16 @@ class AppointmentsRepositoryImpl(
                 appointment
             )
         )
+    }
+
+    override suspend fun completeAppointment(appointment: Appointment): Appointment {
+        return loggedInUserDatasource.getLoggedInUser()?.let {
+            appointmentMapper.mapDataAppointmentToDomain(
+                appointmentsDataSource.completeAppointment(
+                    appointmentMapper.mapDomainAppointmentToData(appointment)
+                ),
+                it
+            )
+        } ?: throw NullPointerException("logged in user not found")
     }
 }

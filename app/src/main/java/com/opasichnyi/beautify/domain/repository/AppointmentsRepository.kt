@@ -10,4 +10,6 @@ interface AppointmentsRepository {
     suspend fun tryAddAppointment(appointment: Appointment): AppointmentCreationResult
 
     suspend fun deleteAppointment(appointment: Appointment)
+
+    suspend fun completeAppointment(appointment: Appointment) : Appointment
 }

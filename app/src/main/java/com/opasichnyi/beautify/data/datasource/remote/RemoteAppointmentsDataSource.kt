@@ -20,14 +20,28 @@ class RemoteAppointmentsDataSource(
         }
     }
 
-    suspend fun tryCreateAppointment(appointment: DataAppointment): Boolean {
+    suspend fun tryCreateAppointment(appointment: DataAppointment): DataAppointment {
         val json = Gson().toJsonTree(appointment)
         val result = appointmentService.createAppointment(json = json)
-        return result.isSuccessful
+        if(result.isSuccessful) {
+            return result.body()!!
+        } else {
+            throw Exception("Error creating appointment")
+        }
+
     }
 
     suspend fun deleteAppointment(appointment: DataAppointment): Boolean {
         val result = appointmentService.deleteAppointment(appointment.id)
         return result.isSuccessful
+    }
+
+    suspend fun completeAppointment(appointment: DataAppointment): DataAppointment {
+        val result = appointmentService.completeAppointment(appointment.id)
+        return if (result.isSuccessful) {
+            result.body()!!
+        } else {
+            throw Exception("Error completing appointment")
+        }
     }
 }

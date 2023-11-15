@@ -7,6 +7,7 @@ import com.lenovo.smartoffice.common.util.extension.lifecycle.repeatOnStart
 import com.opasichnyi.beautify.R
 import com.opasichnyi.beautify.databinding.FragmentCreateAppointmentBinding
 import com.opasichnyi.beautify.domain.entity.Appointment
+import com.opasichnyi.beautify.domain.entity.AppointmentStatus
 import com.opasichnyi.beautify.domain.entity.UserAccount
 import com.opasichnyi.beautify.presentation.entity.UIAppointment
 import com.opasichnyi.beautify.presentation.filters.DecimalDigitsInputFilter
@@ -70,6 +71,7 @@ class CreateAppointmentFragment :
                     startTime = binding?.timeFromEditText?.text.toString(),
                     endTime = binding?.timeToEditText?.text.toString(),
                     price = "20",
+                    status = AppointmentStatus.CANNOT_COMPLETE,
                     description = binding?.descriptionEditText?.text.toString(),
                 )
             )
