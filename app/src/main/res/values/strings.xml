@@ -41,9 +41,16 @@
     <string name="change">Change</string>
     <string name="make_appointment">Make an appointment</string>
     <string name="delete_appointment">Delete appointment</string>
+    <string name="edit_appointment">Edit appointment</string>
+    <string name="complete_appointment">Complete appointment</string>
+    <string name="appointment_completed">Appointment completed</string>
+    <string name="rate_appointment">Rate appointment</string>
     <string name="create">Create</string>
     <string name="settings">Settings</string>
     <string name="logout">Logout</string>
     <string name="delete_account">Delete account</string>
     <string name="error_title">Error!</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_appointment_confirmation">Are you sure you want to delete appointment?</string>
+    <string name="complete_appointment_confirmation">Are you sure you want to complete appointment?</string>
 </resources>

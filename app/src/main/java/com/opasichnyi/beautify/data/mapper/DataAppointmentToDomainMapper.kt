@@ -16,7 +16,7 @@ class DataAppointmentToDomainMapper(
         loggedInUsername: String,
     ): Appointment {
 
-        require(dataAppointment.client != dataAppointment.master)
+        // require(dataAppointment.client != dataAppointment.master)
 
         val currentUserRole = when (loggedInUsername) {
             dataAppointment.client.username -> {
@@ -41,6 +41,7 @@ class DataAppointmentToDomainMapper(
             startTime = dateMapper.mapStringToDate(dataAppointment.startTime),
             endTime = dateMapper.mapStringToDate(dataAppointment.endTime),
             price = dataAppointment.price,
+            status = dataAppointment.status,
             description = dataAppointment.description,
         )
     }
@@ -56,6 +57,7 @@ class DataAppointmentToDomainMapper(
             startTime = dateMapper.mapDateToString(appointment.startTime),
             endTime = dateMapper.mapDateToString(appointment.endTime),
             price = appointment.price,
+            status = appointment.status,
             description = appointment.description,
         )
     }

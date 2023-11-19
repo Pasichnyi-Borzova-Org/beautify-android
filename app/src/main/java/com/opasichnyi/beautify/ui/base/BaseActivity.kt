@@ -62,11 +62,6 @@ open class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatActivit
     }
 
     open fun showError(errorMessage: String) {
-//        Snackbar.make(
-//            findViewById<View>(android.R.id.content).rootView,
-//            errorMessage,
-//            Snackbar.LENGTH_LONG
-//        ).show()
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.error_title))
             .setMessage(errorMessage)
@@ -83,6 +78,17 @@ open class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatActivit
 
     open fun hideProgress() {
         progressDialog.cancel()
+    }
+
+    open fun showConfirmationDialog(message: String, onSubmit: () -> Unit) {
+        AlertDialog.Builder(this)
+            .setMessage(message)
+            .setPositiveButton(
+                android.R.string.ok
+            ) { _, _ ->
+                onSubmit()
+            }
+            .setNegativeButton(R.string.cancel, null).show()
     }
 
     private fun setupProgressDialog() {

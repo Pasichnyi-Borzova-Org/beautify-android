@@ -102,6 +102,10 @@ open class BaseFragment<VB : ViewBinding, VM : BaseViewModel> :
         getBaseActivity().hideProgress()
     }
 
+    open fun showConfirmationDialog(message: String, onSubmit: () -> Unit) {
+        getBaseActivity().showConfirmationDialog(message, onSubmit)
+    }
+
     @CheckResult
     protected fun requireBinding(): VB =
         binding ?: throw IllegalStateException("Binding in fragment $this is null")
