@@ -2,8 +2,8 @@ package com.opasichnyi.beautify.data.mapper
 
 import com.opasichnyi.beautify.data.entity.ApiCallResult
 import com.opasichnyi.beautify.data.entity.DataUserAccount
-import com.opasichnyi.beautify.domain.entity.RegisterResult
 import com.opasichnyi.beautify.domain.entity.RegisterError
+import com.opasichnyi.beautify.domain.entity.RegisterResult
 
 class RegisterResultMapper(
     private val userAccountMapper: DataUserAccountToDomainMapper

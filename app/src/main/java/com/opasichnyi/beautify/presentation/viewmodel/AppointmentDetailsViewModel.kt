@@ -26,6 +26,10 @@ class AppointmentDetailsViewModel(
     val deletedAppointmentFlow: SharedFlow<Appointment> =
         _deletedAppointmentFlow.asSharedFlow()
 
+    private val _editAppointmentFlow = MutableSharedFlow<Appointment>()
+    val editAppointmentFlow: SharedFlow<Appointment> =
+        _editAppointmentFlow.asSharedFlow()
+
     private lateinit var currentAppointment: Appointment
 
     fun onAppointmentLoaded(appointment: Appointment) = scope.launch {
@@ -47,6 +51,10 @@ class AppointmentDetailsViewModel(
         updateCurrentAppointment(
             rateAppointmentInteractor(currentAppointment, rating)
         )
+    }
+
+    fun editCurrentAppointment() = scope.launch {
+        _editAppointmentFlow.emit(currentAppointment)
     }
 
     private fun updateCurrentAppointment(appointment: Appointment) = scope.launch {

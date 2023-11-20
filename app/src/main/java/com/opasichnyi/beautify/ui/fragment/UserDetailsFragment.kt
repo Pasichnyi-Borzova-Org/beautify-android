@@ -62,7 +62,8 @@ class UserDetailsFragment :
     private fun createAppointmentWithMaster() {
         val action =
             UserDetailsFragmentDirections.actionUserDetailsFragmentToCreateAppointmentFragment(
-                user
+                user,
+                null
             )
         findNavController().navigateActionSafe(action)
     }

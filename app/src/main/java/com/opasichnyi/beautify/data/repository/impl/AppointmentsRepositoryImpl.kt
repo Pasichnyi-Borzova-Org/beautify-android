@@ -27,16 +27,15 @@ class AppointmentsRepositoryImpl(
         }.sortedBy { it.startTime }
     }
 
+    // TODO("Get error reason from response")
     override suspend fun tryAddAppointment(appointment: Appointment): AppointmentCreationResult {
-
         return try {
             AppointmentCreationResult.Success(
                 appointmentMapper.mapDataAppointmentToDomain(
                     appointmentsDataSource.tryCreateAppointment(
                         appointmentMapper.mapDomainAppointmentToData(
                             appointment,
-
-                            )
+                        )
                     ),
                     loggedInUserDatasource.getLoggedInUser() ?: throw Exception("Error")
                 )
@@ -76,5 +75,24 @@ class AppointmentsRepositoryImpl(
                 it
             )
         } ?: throw NullPointerException("logged in user not found")
+    }
+
+    // TODO("Get error reason from response")
+    override suspend fun updateAppointment(appointment: Appointment): AppointmentCreationResult {
+        return try {
+            AppointmentCreationResult.Success(
+                appointmentMapper.mapDataAppointmentToDomain(
+                    appointmentsDataSource.tryUpdateAppointment(
+                        appointmentMapper.mapDomainAppointmentToData(
+                            appointment,
+                        )
+                    ),
+                    loggedInUserDatasource.getLoggedInUser()
+                        ?: throw Exception("Error getting logged in user")
+                )
+            )
+        } catch (ex: Exception) {
+            AppointmentCreationResult.Error(ErrorReason.TIME_BUSY)
+        }
     }
 }

@@ -7,6 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface AppointmentService {
@@ -25,5 +26,11 @@ interface AppointmentService {
     suspend fun completeAppointment(@Path("id") id: Long): Response<DataAppointment>
 
     @POST("appointments/rate/{id}/{rating}")
-    suspend fun rateAppointment(@Path("id") id: Long, @Path("rating") rating: Int): Response<DataAppointment>
+    suspend fun rateAppointment(
+        @Path("id") id: Long,
+        @Path("rating") rating: Int
+    ): Response<DataAppointment>
+
+    @PUT("appointments/update")
+    suspend fun updateAppointment(@Body json: JsonElement): Response<DataAppointment>
 }

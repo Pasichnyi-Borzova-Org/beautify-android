@@ -3,7 +3,6 @@ package com.opasichnyi.beautify.data.entity
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.opasichnyi.beautify.domain.entity.AppointmentStatus
-import com.opasichnyi.beautify.domain.entity.UserAccount
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

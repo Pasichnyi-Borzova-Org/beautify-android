@@ -11,7 +11,10 @@ interface AppointmentsRepository {
 
     suspend fun deleteAppointment(appointment: Appointment)
 
-    suspend fun completeAppointment(appointment: Appointment) : Appointment
+    suspend fun completeAppointment(appointment: Appointment): Appointment
 
-    suspend fun rateAppointment(appointment: Appointment, rating: Int) : Appointment
+    suspend fun rateAppointment(appointment: Appointment, rating: Int): Appointment
+
+    // TODO("It's not OK to use CreationResult after update")
+    suspend fun updateAppointment(appointment: Appointment): AppointmentCreationResult
 }

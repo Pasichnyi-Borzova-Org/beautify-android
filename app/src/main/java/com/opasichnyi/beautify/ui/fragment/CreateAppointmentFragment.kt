@@ -1,6 +1,7 @@
 package com.opasichnyi.beautify.ui.fragment
 
 import android.text.InputFilter
+import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lenovo.smartoffice.common.util.extension.lifecycle.repeatOnStart
@@ -22,12 +23,19 @@ class CreateAppointmentFragment :
 
     private val master: UserAccount get() = args.selectedMaster
 
+    private val editingAppointment: Appointment? get() = args.editingAppointment
+
     private lateinit var client: UserAccount
 
     override fun onResume() {
         super.onResume()
         initView()
-        viewModel.onScreenOpened(master)
+        if (isEditing()) {
+            editingAppointment?.let { viewModel.onUpdateScreenOpened(it) }
+                ?: throw Exception("Marked as editing but no editing appointment found")
+        } else {
+            viewModel.onCreateScreenOpened(master)
+        }
     }
 
     override fun listenViewModel(
@@ -54,6 +62,12 @@ class CreateAppointmentFragment :
                 showAppointmentDetailsPage(it)
             }
         }
+
+        viewLifecycleOwner.repeatOnStart {
+            viewModel.editingAppointmentFlow.collect {
+                setEditingView(it)
+            }
+        }
     }
 
     private fun initView() {
@@ -61,19 +75,7 @@ class CreateAppointmentFragment :
 
         binding?.createButton?.setOnClickListener {
             viewModel.tryCreateAppointment(
-                UIAppointment(
-                    id = -1,
-                    title = binding?.titleEditText?.text.toString(),
-                    master = master,
-                    client = client,
-                    loggedInUserRole = client.role,
-                    date = binding?.dateEditText?.text.toString(),
-                    startTime = binding?.timeFromEditText?.text.toString(),
-                    endTime = binding?.timeToEditText?.text.toString(),
-                    price = "20",
-                    status = AppointmentStatus.CANNOT_COMPLETE,
-                    description = binding?.descriptionEditText?.text.toString(),
-                )
+                getAppointmentFromFields()
             )
         }
     }
@@ -93,4 +95,41 @@ class CreateAppointmentFragment :
             )
         findNavController().navigateActionSafe(action)
     }
+
+    private fun isEditing() = editingAppointment != null
+
+    private fun setEditingView(appointment: UIAppointment) {
+        client = appointment.client
+        binding?.clientText?.text = getFullNameFromUserAccount(appointment.client)
+        binding?.masterText?.text = getFullNameFromUserAccount(appointment.master)
+        binding?.titleEditText?.setText(appointment.title)
+        binding?.dateEditText?.setText(appointment.date)
+        binding?.timeFromEditText?.setText(appointment.startTime)
+        binding?.timeToEditText?.setText(appointment.endTime)
+        binding?.descriptionEditText?.setText(appointment.description)
+
+        binding?.changeMasterButton?.visibility = View.INVISIBLE
+        binding?.changeClientButton?.visibility = View.INVISIBLE
+
+        binding?.createButton?.apply {
+            setText(R.string.edit_appointment)
+            setOnClickListener {
+                viewModel.tryEditAppointment(getAppointmentFromFields())
+            }
+        }
+    }
+
+    private fun getAppointmentFromFields() = UIAppointment(
+        id = editingAppointment?.id ?: -1,
+        title = binding?.titleEditText?.text.toString(),
+        master = master,
+        client = client,
+        loggedInUserRole = client.role,
+        date = binding?.dateEditText?.text.toString(),
+        startTime = binding?.timeFromEditText?.text.toString(),
+        endTime = binding?.timeToEditText?.text.toString(),
+        price = "20",
+        status = AppointmentStatus.CANNOT_COMPLETE,
+        description = binding?.descriptionEditText?.text.toString(),
+    )
 }
