@@ -44,4 +44,13 @@ class RemoteAppointmentsDataSource(
             throw Exception("Error completing appointment")
         }
     }
+
+    suspend fun rateAppointment(appointment: DataAppointment, rating: Int) : DataAppointment {
+        val result = appointmentService.rateAppointment(appointment.id, rating)
+        return if (result.isSuccessful) {
+            result.body()!!
+        } else {
+            throw Exception("Error rating appointment")
+        }
+    }
 }

@@ -17,6 +17,7 @@ data class Appointment(
     // TODO("Add different currencies (BTF-12)")
     val price: Double,
     val status: AppointmentStatus,
+    val rating: Int? = null,
     val description: String?,
 ) : Parcelable
 

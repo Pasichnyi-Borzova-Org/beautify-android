@@ -12,4 +12,6 @@ interface AppointmentsRepository {
     suspend fun deleteAppointment(appointment: Appointment)
 
     suspend fun completeAppointment(appointment: Appointment) : Appointment
+
+    suspend fun rateAppointment(appointment: Appointment, rating: Int) : Appointment
 }

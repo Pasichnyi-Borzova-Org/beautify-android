@@ -23,4 +23,7 @@ interface AppointmentService {
     // TODO("Check session to allow only master to complete appointment")
     @POST("appointments/complete/{id}")
     suspend fun completeAppointment(@Path("id") id: Long): Response<DataAppointment>
+
+    @POST("appointments/rate/{id}/{rating}")
+    suspend fun rateAppointment(@Path("id") id: Long, @Path("rating") rating: Int): Response<DataAppointment>
 }

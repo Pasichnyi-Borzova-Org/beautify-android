@@ -64,4 +64,17 @@ class AppointmentsRepositoryImpl(
             )
         } ?: throw NullPointerException("logged in user not found")
     }
+
+    override suspend fun rateAppointment(appointment: Appointment, rating: Int): Appointment {
+        return loggedInUserDatasource.getLoggedInUser()?.let {
+            appointmentMapper.mapDataAppointmentToDomain(
+                appointmentsDataSource.rateAppointment(
+                    appointmentMapper.mapDomainAppointmentToData(
+                        appointment
+                    ), rating
+                ),
+                it
+            )
+        } ?: throw NullPointerException("logged in user not found")
+    }
 }
