@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.lenovo.smartoffice.common.util.extension.lifecycle.repeatOnStart
 import com.opasichnyi.beautify.R
 import com.opasichnyi.beautify.databinding.ActivityHomeBinding
 import com.opasichnyi.beautify.domain.entity.UserAccount

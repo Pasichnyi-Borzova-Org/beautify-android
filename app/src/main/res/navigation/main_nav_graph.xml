@@ -23,6 +23,9 @@
         <argument
             android:name="appointment"
             app:argType="com.opasichnyi.beautify.domain.entity.Appointment" />
+        <action
+            android:id="@+id/action_appointmentDetailsFragment_to_createAppointmentFragment"
+            app:destination="@id/createAppointmentFragment" />
     </fragment>
 
     <fragment
@@ -56,6 +59,10 @@
         <argument
             android:name="selectedMaster"
             app:argType="com.opasichnyi.beautify.domain.entity.UserAccount" />
+        <argument
+            android:name="editing_appointment"
+            app:nullable="true"
+            app:argType="com.opasichnyi.beautify.domain.entity.Appointment" />
         <action
             android:id="@+id/action_createAppointmentFragment_to_appointmentDetailsFragment"
             app:popUpTo="@id/userDetailsFragment"
