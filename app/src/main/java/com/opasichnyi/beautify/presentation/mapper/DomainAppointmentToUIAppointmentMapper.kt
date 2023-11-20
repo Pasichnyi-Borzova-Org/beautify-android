@@ -29,6 +29,7 @@ class DomainAppointmentToUIAppointmentMapper(
             endTime = timeFormat.format(appointment.endTime),
             // TODO("Change dollar sign to different currencies (BTF-12)")
             price = "${appointment.price}$",
+            rating = appointment.rating,
             status = appointment.status,
             description = appointment.description,
         )
@@ -63,6 +64,7 @@ class DomainAppointmentToUIAppointmentMapper(
             },
             price = appointment.price.removeSuffix("$").toDouble(),
             status = appointment.status,
+            rating = appointment.rating,
             description = appointment.description,
         )
     }

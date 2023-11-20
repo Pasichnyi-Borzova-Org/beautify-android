@@ -20,5 +20,6 @@ data class DataAppointment(
     val endTime: String,
     val price: Double,
     val status: AppointmentStatus,
+    val rating: Int? = null,
     val description: String?,
 ) : Parcelable

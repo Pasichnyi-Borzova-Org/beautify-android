@@ -15,6 +15,7 @@ data class UIAppointment(
     val endTime: String,
     val price: String,
     val status: AppointmentStatus,
+    val rating: Int? = null,
     val description: String?,
 ) {
     val partnerUserName = if (loggedInUserRole == UserRole.MASTER) {

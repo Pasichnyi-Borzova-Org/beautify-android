@@ -42,6 +42,7 @@ class DataAppointmentToDomainMapper(
             endTime = dateMapper.mapStringToDate(dataAppointment.endTime),
             price = dataAppointment.price,
             status = dataAppointment.status,
+            rating = dataAppointment.rating,
             description = dataAppointment.description,
         )
     }
@@ -58,6 +59,7 @@ class DataAppointmentToDomainMapper(
             endTime = dateMapper.mapDateToString(appointment.endTime),
             price = appointment.price,
             status = appointment.status,
+            rating = appointment.rating,
             description = appointment.description,
         )
     }

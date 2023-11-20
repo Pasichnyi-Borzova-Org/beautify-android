@@ -22,6 +22,7 @@ import com.opasichnyi.beautify.domain.interactor.GetUsersInteractor
 import com.opasichnyi.beautify.domain.interactor.LoggedInUserInteractor
 import com.opasichnyi.beautify.domain.interactor.LoginInteractor
 import com.opasichnyi.beautify.domain.interactor.LogoutInteractor
+import com.opasichnyi.beautify.domain.interactor.RateAppointmentInteractor
 import com.opasichnyi.beautify.domain.interactor.RegistrationInteractor
 import com.opasichnyi.beautify.domain.interactor.TryCreateAppointmentInteractor
 import com.opasichnyi.beautify.domain.mapper.DateMapper
@@ -186,6 +187,8 @@ private val domainModule = module {
     single { DeleteCurrentAccountInteractor(userRepository = get()) }
 
     single { CompleteAppointmentInteractor(appointmentsRepository = get()) }
+
+    single { RateAppointmentInteractor(appointmentsRepository = get()) }
 }
 
 private val viewModelModule = module {
@@ -230,6 +233,7 @@ private val viewModelModule = module {
             appointmentMapper = get(),
             deleteAppointmentInteractor = get(),
             completeAppointmentInteractor = get(),
+            rateAppointmentInteractor = get(),
         )
     }
 
