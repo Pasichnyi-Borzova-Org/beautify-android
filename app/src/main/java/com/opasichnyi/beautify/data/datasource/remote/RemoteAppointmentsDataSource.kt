@@ -50,13 +50,9 @@ class RemoteAppointmentsDataSource(
         }
     }
 
-    suspend fun tryUpdateAppointment(appointment: DataAppointment): DataAppointment {
+    suspend fun tryUpdateAppointment(appointment: DataAppointment): ApiCallResult<DataAppointment, AppointmentCreationError> {
         val json = Gson().toJsonTree(appointment)
-        val result = appointmentService.updateAppointment(json = json)
-        if (result.isSuccessful) {
-            return result.body()!!
-        } else {
-            throw Exception("Error updating appointment")
-        }
+        val response = appointmentService.updateAppointment(json = json)
+        return response.body()!!
     }
 }

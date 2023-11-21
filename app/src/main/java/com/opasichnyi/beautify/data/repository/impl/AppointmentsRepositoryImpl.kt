@@ -5,7 +5,6 @@ import com.opasichnyi.beautify.data.datasource.remote.RemoteAppointmentsDataSour
 import com.opasichnyi.beautify.data.mapper.AppointmentCreationResultMapper
 import com.opasichnyi.beautify.data.mapper.DataAppointmentToDomainMapper
 import com.opasichnyi.beautify.domain.entity.Appointment
-import com.opasichnyi.beautify.domain.entity.AppointmentCreationError
 import com.opasichnyi.beautify.domain.entity.AppointmentCreationResult
 import com.opasichnyi.beautify.domain.repository.AppointmentsRepository
 
@@ -51,9 +50,9 @@ class AppointmentsRepositoryImpl(
                 appointment,
             )
         )
-
         return loggedInUserDatasource.getLoggedInUser()?.let {
-            appointmentCreationResultMapper.mapAppointmentCreationResultToDomain(result,
+            appointmentCreationResultMapper.mapAppointmentCreationResultToDomain(
+                result,
                 it
             )
         } ?: throw Exception("No logged in user found")
@@ -93,20 +92,16 @@ class AppointmentsRepositoryImpl(
 
     // TODO("Get error reason from response")
     override suspend fun updateAppointment(appointment: Appointment): AppointmentCreationResult {
-        return try {
-            AppointmentCreationResult.Success(
-                appointmentMapper.mapDataAppointmentToDomain(
-                    appointmentsDataSource.tryUpdateAppointment(
-                        appointmentMapper.mapDomainAppointmentToData(
-                            appointment,
-                        )
-                    ),
-                    loggedInUserDatasource.getLoggedInUser()
-                        ?: throw Exception("Error getting logged in user")
-                )
+        val result = appointmentsDataSource.tryUpdateAppointment(
+            appointmentMapper.mapDomainAppointmentToData(
+                appointment,
             )
-        } catch (ex: Exception) {
-            AppointmentCreationResult.Error(AppointmentCreationError.TIME_IS_OCCUPIED)
-        }
+        )
+        return loggedInUserDatasource.getLoggedInUser()?.let {
+            appointmentCreationResultMapper.mapAppointmentCreationResultToDomain(
+                result,
+                it
+            )
+        } ?: throw Exception("No logged in user found")
     }
 }

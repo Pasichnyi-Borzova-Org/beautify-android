@@ -34,5 +34,5 @@ interface AppointmentService {
     ): Response<DataAppointment>
 
     @PUT("appointments/update")
-    suspend fun updateAppointment(@Body json: JsonElement): Response<DataAppointment>
+    suspend fun updateAppointment(@Body json: JsonElement): Response<ApiCallResult<DataAppointment, AppointmentCreationError>>
 }
