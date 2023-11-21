@@ -7,9 +7,11 @@ sealed class AppointmentCreationResult {
         val appointment: Appointment,
     ) : AppointmentCreationResult()
 
-    data class Error(val reason: ErrorReason) : AppointmentCreationResult()
+    data class Error(val reason: AppointmentCreationError) : AppointmentCreationResult()
 }
 
-enum class ErrorReason {
-    TIME_BUSY,
-}
+//enum class AppointmentCreationErrorReason {
+//    TIME_IS_OCCUPIED,
+//    REQUIRED_FIELDS_ARE_MISSING,
+//    DB_INSERT_FAILED,
+//}

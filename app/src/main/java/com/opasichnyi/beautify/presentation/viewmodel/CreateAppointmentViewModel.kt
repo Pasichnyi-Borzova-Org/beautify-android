@@ -1,8 +1,8 @@
 package com.opasichnyi.beautify.presentation.viewmodel
 
 import com.opasichnyi.beautify.domain.entity.Appointment
+import com.opasichnyi.beautify.domain.entity.AppointmentCreationError
 import com.opasichnyi.beautify.domain.entity.AppointmentCreationResult
-import com.opasichnyi.beautify.domain.entity.ErrorReason
 import com.opasichnyi.beautify.domain.entity.UserAccount
 import com.opasichnyi.beautify.domain.interactor.EditAppointmentInteractor
 import com.opasichnyi.beautify.domain.interactor.LoggedInUserInteractor
@@ -96,11 +96,12 @@ class CreateAppointmentViewModel(
         }
 
     // TODO("Emit result and fully process on fragment")
-    // TODO("BTF-34 process all possible backend errors")
     private fun onAppointmentCreationError(result: AppointmentCreationResult.Error) {
         showError(
             when (result.reason) {
-                ErrorReason.TIME_BUSY -> "Time is busy. Select another one"
+                AppointmentCreationError.REQUIRED_FIELDS_ARE_MISSING -> "Required fields are missing"
+                AppointmentCreationError.TIME_IS_OCCUPIED -> "Time is busy. Select another one"
+                AppointmentCreationError.DB_INSERT_FAILED -> "Database insert failed"
             }
         )
     }

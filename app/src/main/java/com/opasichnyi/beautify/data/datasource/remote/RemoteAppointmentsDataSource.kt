@@ -2,7 +2,9 @@ package com.opasichnyi.beautify.data.datasource.remote
 
 import com.google.gson.Gson
 import com.opasichnyi.beautify.data.datasource.remote.service.AppointmentService
+import com.opasichnyi.beautify.data.entity.ApiCallResult
 import com.opasichnyi.beautify.data.entity.DataAppointment
+import com.opasichnyi.beautify.domain.entity.AppointmentCreationError
 
 // TODO("Add security mechanisms for sensitive information manipulation")
 class RemoteAppointmentsDataSource(
@@ -19,14 +21,10 @@ class RemoteAppointmentsDataSource(
         }
     }
 
-    suspend fun tryCreateAppointment(appointment: DataAppointment): DataAppointment {
+    suspend fun tryCreateAppointment(appointment: DataAppointment): ApiCallResult<DataAppointment, AppointmentCreationError> {
         val json = Gson().toJsonTree(appointment)
-        val result = appointmentService.createAppointment(json = json)
-        if (result.isSuccessful) {
-            return result.body()!!
-        } else {
-            throw Exception("Error creating appointment")
-        }
+        val response = appointmentService.createAppointment(json = json)
+        return response.body()!!
     }
 
     suspend fun deleteAppointment(appointment: DataAppointment): Boolean {

@@ -2,16 +2,18 @@ package com.opasichnyi.beautify.data.repository.impl
 
 import com.opasichnyi.beautify.data.datasource.LoggedInUserDatasource
 import com.opasichnyi.beautify.data.datasource.remote.RemoteAppointmentsDataSource
+import com.opasichnyi.beautify.data.mapper.AppointmentCreationResultMapper
 import com.opasichnyi.beautify.data.mapper.DataAppointmentToDomainMapper
 import com.opasichnyi.beautify.domain.entity.Appointment
+import com.opasichnyi.beautify.domain.entity.AppointmentCreationError
 import com.opasichnyi.beautify.domain.entity.AppointmentCreationResult
-import com.opasichnyi.beautify.domain.entity.ErrorReason
 import com.opasichnyi.beautify.domain.repository.AppointmentsRepository
 
 class AppointmentsRepositoryImpl(
     private val loggedInUserDatasource: LoggedInUserDatasource,
     private val appointmentMapper: DataAppointmentToDomainMapper,
     private val appointmentsDataSource: RemoteAppointmentsDataSource,
+    private val appointmentCreationResultMapper: AppointmentCreationResultMapper,
 ) : AppointmentsRepository {
 
     override suspend fun getUpcomingAppointments(): List<Appointment> {
@@ -29,20 +31,32 @@ class AppointmentsRepositoryImpl(
 
     // TODO("Get error reason from response")
     override suspend fun tryAddAppointment(appointment: Appointment): AppointmentCreationResult {
-        return try {
-            AppointmentCreationResult.Success(
-                appointmentMapper.mapDataAppointmentToDomain(
-                    appointmentsDataSource.tryCreateAppointment(
-                        appointmentMapper.mapDomainAppointmentToData(
-                            appointment,
-                        )
-                    ),
-                    loggedInUserDatasource.getLoggedInUser() ?: throw Exception("Error")
-                )
+//        return try {
+//            AppointmentCreationResult.Success(
+//                appointmentMapper.mapDataAppointmentToDomain(
+//                    appointmentsDataSource.tryCreateAppointment(
+//                        appointmentMapper.mapDomainAppointmentToData(
+//                            appointment,
+//                        )
+//                    ),
+//                    loggedInUserDatasource.getLoggedInUser() ?: throw Exception("Error")
+//                )
+//            )
+//        } catch (ex: Exception) {
+//            AppointmentCreationResult.Error(AppointmentCreationErrorReason.TIME_IS_OCCUPIED)
+//        }
+
+        val result = appointmentsDataSource.tryCreateAppointment(
+            appointmentMapper.mapDomainAppointmentToData(
+                appointment,
             )
-        } catch (ex: Exception) {
-            AppointmentCreationResult.Error(ErrorReason.TIME_BUSY)
-        }
+        )
+
+        return loggedInUserDatasource.getLoggedInUser()?.let {
+            appointmentCreationResultMapper.mapAppointmentCreationResultToDomain(result,
+                it
+            )
+        } ?: throw Exception("No logged in user found")
     }
 
     override suspend fun deleteAppointment(appointment: Appointment) {
@@ -92,7 +106,7 @@ class AppointmentsRepositoryImpl(
                 )
             )
         } catch (ex: Exception) {
-            AppointmentCreationResult.Error(ErrorReason.TIME_BUSY)
+            AppointmentCreationResult.Error(AppointmentCreationError.TIME_IS_OCCUPIED)
         }
     }
 }

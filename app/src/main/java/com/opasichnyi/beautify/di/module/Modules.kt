@@ -6,6 +6,7 @@ import com.opasichnyi.beautify.data.datasource.remote.RemoteAccountDataSource
 import com.opasichnyi.beautify.data.datasource.remote.RemoteAppointmentsDataSource
 import com.opasichnyi.beautify.data.datasource.remote.service.AccountService
 import com.opasichnyi.beautify.data.datasource.remote.service.AppointmentService
+import com.opasichnyi.beautify.data.mapper.AppointmentCreationResultMapper
 import com.opasichnyi.beautify.data.mapper.DataAppointmentToDomainMapper
 import com.opasichnyi.beautify.data.mapper.DataRegisterDataToDomainMapper
 import com.opasichnyi.beautify.data.mapper.DataUserAccountToDomainMapper
@@ -116,6 +117,7 @@ private val dataModule = module {
             loggedInUserDatasource = get(),
             appointmentMapper = get(),
             appointmentsDataSource = get(),
+            appointmentCreationResultMapper = get()
         )
     }
 
@@ -130,6 +132,8 @@ private val dataModule = module {
     single { RegisterResultMapper(userAccountMapper = get()) }
 
     single { DataRegisterDataToDomainMapper() }
+
+    single { AppointmentCreationResultMapper(appointmentMapper = get()) }
 
     single {
         val interceptor = HttpLoggingInterceptor()
