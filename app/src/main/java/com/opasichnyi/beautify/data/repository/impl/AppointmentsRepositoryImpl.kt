@@ -28,7 +28,6 @@ class AppointmentsRepositoryImpl(
         }.sortedBy { it.startTime }
     }
 
-    // TODO("Get error reason from response")
     override suspend fun tryAddAppointment(appointment: Appointment): AppointmentCreationResult {
 //        return try {
 //            AppointmentCreationResult.Success(
@@ -90,7 +89,6 @@ class AppointmentsRepositoryImpl(
         } ?: throw NullPointerException("logged in user not found")
     }
 
-    // TODO("Get error reason from response")
     override suspend fun updateAppointment(appointment: Appointment): AppointmentCreationResult {
         val result = appointmentsDataSource.tryUpdateAppointment(
             appointmentMapper.mapDomainAppointmentToData(
