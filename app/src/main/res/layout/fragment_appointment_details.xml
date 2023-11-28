@@ -88,6 +88,7 @@
         android:backgroundTint="@color/positive_green"
         android:text="@string/complete_appointment"
         android:visibility="invisible"
+        tools:visibility="visible"
         app:layout_constraintBottom_toTopOf="@id/editAppointmentButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -117,8 +118,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/editAppointmentButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:visibility="visible" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
         android:id="@+id/deleteAppointmentButton"
