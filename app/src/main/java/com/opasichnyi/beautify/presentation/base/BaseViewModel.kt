@@ -3,6 +3,7 @@ package com.opasichnyi.beautify.presentation.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,8 +22,9 @@ open class BaseViewModel : ViewModel() {
     val coroutineContext = Dispatchers.Main +
             CoroutineExceptionHandler { _, exception ->
                 showError(exception.message ?: "Something went wrong")
-            } + SupervisorJob()
+            } + viewModelScope.coroutineContext
 
+    val scope = CoroutineScope(coroutineContext)
 
     fun showError(errorMessage: String) {
         _errorStateFlow.value = errorMessage
@@ -39,6 +41,4 @@ open class BaseViewModel : ViewModel() {
     fun hideProgress() {
         _progressStateFlow.value = false
     }
-
-    val scope get() = viewModelScope
 }
