@@ -82,24 +82,23 @@
 
     <Button
         android:id="@+id/completeAppointmentButton"
-        style="@style/Wide"
+        style="@style/PositiveButtonStyle"
+        android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/positive_green"
         android:text="@string/complete_appointment"
         android:visibility="invisible"
-        tools:visibility="visible"
         app:layout_constraintBottom_toTopOf="@id/editAppointmentButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/editAppointmentButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:backgroundTint="@color/color_primary"
         android:text="@string/edit_appointment"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -118,14 +117,14 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/editAppointmentButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/deleteAppointmentButton"
+        style="@style/NegativeButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:backgroundTint="@color/negative_red"
         android:text="@string/delete_appointment"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -138,9 +137,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:backgroundTint="@color/color_primary"
         android:text="@string/rate_appointment"
         android:visibility="invisible"
+        app:backgroundTint="@color/color_primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

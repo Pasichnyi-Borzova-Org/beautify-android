@@ -76,4 +76,20 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
+    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/PositiveTextButtonOverlay</item>
+    </style>
+
+    <style name="PositiveTextButtonOverlay">
+        <item name="colorPrimary">@color/positive_green</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/NegativeTextButtonOverlay</item>
+    </style>
+
+    <style name="NegativeTextButtonOverlay">
+        <item name="colorPrimary">@color/negative_red</item>
+    </style>
+
 </resources>
